@@ -2,3 +2,33 @@
 .debug {
     border-style:solid;
 }
+.right {
+  text-align: right;
+}
+.center {
+  text-align: center;
+}
+.searchResults {
+  display: inline-block;
+  text-align: center;
+  padding: 50px;
+  width: 100px;
+  height: 100px;
+  vertical-align: text-top;
+}
+.details {
+  display: block;
+  width: 400px;
+  height: 100px;
+}
+.detailsprice {
+  vertical-align: bottom;
+  padding: 50px;
+  display: inline-block;
+}
+.search{}
+.sidebar{flex: 0%;}
+.mainContent{flex: 100%;}
+@media (min-width: 400px){
+      .flexParent{ display:flex; flex-direction: column;}
+}
