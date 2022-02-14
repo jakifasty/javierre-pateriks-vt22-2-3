@@ -1,4 +1,4 @@
-import SummaryView from "../views/searchFormView.js";
+import SummaryView from "../views/summaryView.js";
 import { shoppingList } from "../utilities"
 export default
 function Summary(props){

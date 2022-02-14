@@ -4,7 +4,7 @@ import  {searchDishes, getDishDetails} from "./dishSource.js";
    The Model keeps only abstract data and has no notions of graohics or interaction
 */
 function isValid(id){
-  return (typeof(id) == "number")
+  return (typeof(id) == "number");
 }
 class DinnerModel{
     constructor(nrGuests=2, dishArray=[], currentDish){
@@ -55,7 +55,13 @@ class DinnerModel{
        So we store also abstract data that will influence the application status.
      */
      setCurrentDish(id){
-         this.currentDish= id;
+         if(!id || id == this.currentDish || !isValid(id)){
+
+         }
+         else{
+           this.currentDish= id;
+           resolvePromise(getDishDetails(id), this.currentDishPromiseState);
+         }
      }
      removeDish(id){
        // callback exercise! Also return keyword exercise
@@ -72,7 +78,7 @@ class DinnerModel{
        this.searchParams.query = q;
      }
      setSearchType(t){
-       this.searchParams.type = t
+       this.searchParams.type = t;
      }
      doSearch(params){
        if(params){
@@ -81,11 +87,6 @@ class DinnerModel{
        else{
          resolvePromise(searchDishes(this.searchParams), this.searchResultsPromiseState);
        }
-
-     }
-     setCurrentDish(id){
-       if(!id || id == this.currentDish || !isValid(id)) return;
-       resolvePromise(getDishDetails(id), this.currentDishPromiseState);
      }
 
 }

@@ -109,6 +109,7 @@ describe("TW2.5 SearchPresenter", function() {
     expect(type, "did not expect model method to be called").to.equal(undefined);
 
     // testing event handlers
+
     const threeHandlers = Object.keys(SearchFormViewProps).filter(function(prop){
       return !["dishTypeOptions"].includes(prop)
     });
@@ -120,6 +121,7 @@ describe("TW2.5 SearchPresenter", function() {
 
     // testing that the handlers change the right properties in the model
     threeHandlers.forEach(handler => {
+      console.log(handler);
       expect(typeof SearchFormViewProps[handler]).to.equal("function", "expected custom event handlers to be functions");
       searched=undefined;
       text=undefined;

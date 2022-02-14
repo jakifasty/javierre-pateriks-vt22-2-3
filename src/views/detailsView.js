@@ -1,5 +1,4 @@
 function DetailsView(props){
-  console.log(props.dishData)
   function listCB(item){
     return <li>{item.name}: {item.amount} {item.unit}</li>;
   }

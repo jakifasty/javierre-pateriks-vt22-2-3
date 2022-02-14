@@ -7,7 +7,7 @@ function SearchFormView(props){
               <div>
                 <input type="text" onchange = {function(event){props.search(this.value)}}>
                 </input>
-                <select onchange = {function(event){props.choice(this.value)}}>
+                <select onchange = {function(event){props.chooseCourseACB(this.value)}}>
                 <option>
                 Choose:
                 </option>
