@@ -10,8 +10,10 @@ function Search(props){
   function searchACB(input){
     props.model.setSearchQuery(input);
   }
-  function choiceACB(input){
-    props.model.setSearchType(knownTypes[input]);
+  function choicesACB(event){
+    console.log(event);
+    console.log(this.value);
+    props.model.setSearchType(knownTypes[this.value]);
   }
   function chooseDishACB(dish){
     props.model.setCurrentDish(dish.id);
@@ -21,7 +23,7 @@ function Search(props){
   }
   return(
           <div>
-                <SearchFormView dishTypeOptions={knownTypes} click={clickACB} search={searchACB} chooseCourseACB={choiceACB}/>
+                <SearchFormView dishTypeOptions={knownTypes} click={clickACB} search={searchACB} choiceChangeACB={choicesACB}/>
                 {promiseNoData(props.model.searchResultsPromiseState) || <SearchResultsView searchResults={props.model.searchResultsPromiseState.data} chooseDish={chooseDishACB}/>}
           </div>);
 }

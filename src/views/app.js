@@ -13,14 +13,14 @@ export default
 function App(props){
     return (<div class="flexParent">
                 {/* TODO TW1.2 Sidebar will be added here, inside a DIV, like Summary below */}
-                <div  class="sidebar">
+                <span  class="sidebar">
                   <Sidebar model={props.model} />
                   <Summary model={props.model} />
-                </div>
-                <div  class="mainContent">
+                </span>
+                <span  class="mainContent">
                   <Search model={props.model} />
                   <Details model={props.model} />
-                </div>
+                </span>
             </div>
            );
 }
