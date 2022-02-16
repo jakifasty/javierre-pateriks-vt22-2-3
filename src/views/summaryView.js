@@ -1,4 +1,4 @@
-import { sortIngredients, sortDishes } from "../utilities"
+import { sortIngredients, sortDishes } from "../utilities.js"
 /* Functional JSX component. Name starts with capital letter */
 function SummaryView(props){
     return (
