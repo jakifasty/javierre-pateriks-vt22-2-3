@@ -2,33 +2,69 @@
 .debug {
     border-style:solid;
 }
-.right {
-  text-align: right;
+
+.right{
+    text-align:  right;    
 }
-.center {
-  text-align: center;
+
+.left{
+    text-align:  left;    
 }
-.searchResults {
-  display: inline-block;
-  text-align: center;
-  padding: 50px;
-  width: 100px;
-  height: 100px;
-  vertical-align: text-top;
+
+@media (max-width: 12450px){ 
+    .flexParent{
+        display:        flex;
+        text-align:  sidebar;
+        display:        flex; 
 }
-.details {
-  display: block;
-  width: 400px;
-  height: 100px;
+
+.sidebar{
+    flex:   1;
+    width: 10px;
+    padding: 20px;
+    border: 1px solid lightblue;
+    background-color: white;
+   
 }
-.detailsprice {
-  vertical-align: bottom;
-  padding: 50px;
-  display: inline-block;
+
+.mainContent{
+    flex:  3;  
 }
-.search{}
-.sidebar{flex: 0%;}
-.mainContent{flex: 100%;}
-@media (min-width: 400px){
-      .flexParent{ display:flex; flex-direction: column;}
+
+.searchResults{
+    text-align:  center;
+    vertical-align:   baseline;
+    display: inline-block;
+
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+
+}
+
+.detailsColumn{
+    float: left;
+    width: 50%;
+    padding: 10px;
+    //flex: 50%;
+}
+
+.detailsRow: after{
+    content: "";
+    display: table;
+    clear: both;
+
+    //display: flex;
+}
+
+.border {
+        
+     border-style:  solid;
+     border-color:  #287EC7;
+}
+
+.imageGIF{
+    height:  100;
+    width:  100;
 }
