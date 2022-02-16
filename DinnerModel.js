@@ -1,10 +1,18 @@
 /* This is an example of a JavaScript class.
    The Model keeps only abstract data and has no notions of graohics or interaction
 */
+import resolvePromise from "./resolvePromise.js"
+import {getDishDetails, searchDishes} from "./dishSource.js"
+
 class DinnerModel{
     constructor(nrGuests=2, dishArray=[], currentDish){
         this.setNumberOfGuests(nrGuests);
         this.dishes= dishArray;
+        this.currentDish = {}; //ADDED TESTING
+
+        this.currentDishPromiseState = {};
+        this.searchResultsPromiseState = {} ; //(property). DinnerModel constructor, set model properties to empty objects
+        this.searchParams = {}; //(property). DinnerModel constructor, set model properties to empty objects
     }
     setNumberOfGuests(nr){
         if(Number.isInteger(nr) & nr>0){
@@ -30,7 +38,7 @@ class DinnerModel{
     removeFromMenu(dishToRemove){
         // callback exercise! Also return keyword exercise
         function hasSameIdCB(dish){
-          return dishToRemove.id !== dish.id;
+            return dishToRemove.id !== dish.id;
             // TODO return true if the id property of dish is _different_ from the dishToRemove's id property
             // This will keep the dish when we filter below.
             // That is, we will not keep the dish that has the same id as dishToRemove (if any)
@@ -43,21 +51,48 @@ class DinnerModel{
        A strict MVC/MVP Model would not keep such data,
        but we take a more relaxed, "Application state" approach.
        So we store also abstract data that will influence the application status.
-     */
-     setCurrentDish(id){
-         this.currentDish= id;
-     }
-     removeDish(id){
-       // callback exercise! Also return keyword exercise
-       function hasSameIdCB(dish){
-         return id !== dish.id;
-           // TODO return true if the id property of dish is _different_ from the dishToRemove's id property
-           // This will keep the dish when we filter below.
-           // That is, we will not keep the dish that has the same id as dishToRemove (if any)
-       }
-       this.dishes= this.dishes.filter(hasSameIdCB/*TODO pass the callback!*/);
-       // the test "can remove dishes" should pass
-     }
+    */
+    setCurrentDish(id){
+        //console.log(currentDish)
+        if((typeof(id) === "number") && (id !== null)  && (id !== this.currentDish)){
+            
+            resolvePromise(getDishDetails(id), this.currentDishPromiseState);
+        }
+        else
+            this.currentDish = id;
+        /*if((typeof(id) === "defined") && (id !== currentDish.id)){
+            this.currentDishPromiseState = resolvePromise(searchDishes(this.searchParams), this.searchResultsPromiseState);
+            //this.currentDishPromiseState = resolvePromise(getDishDetails(id), this.searchResultsPromiseState);
+        }*/  
+    }
+    removeDish(id){
+        // callback exercise! Also return keyword exercise
+        function hasSameIdCB(dish){
+            return id !== dish.id;
+            // TODO return true if the id property of dish is _different_ from the dishToRemove's id property
+            // This will keep the dish when we filter below.
+            // That is, we will not keep the dish that has the same id as dishToRemove (if any)
+        }
+        this.dishes = this.dishes.filter(hasSameIdCB);
+    // the test "can remove dishes" should pass
+    }
+
+    setSearchQuery(q){
+        this.searchParams.query = q;
+
+    }
+
+    setSearchType(t){
+        this.searchParams.type = t;
+    }
+
+    doSearch(params){
+
+        if(!params)
+            resolvePromise(searchDishes(this.searchParams), this.searchResultsPromiseState);
+        else
+            resolvePromise(searchDishes(params), this.searchResultsPromiseState);
+    }
 
 }
 
