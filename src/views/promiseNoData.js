@@ -6,7 +6,7 @@ function promiseNoData(props){
 
       return <div>no data</div>
     }else if(promise && !data && !error){
-      return  <img height="200" src={lama}></img>
+      return  <img height="200" src={loading_gif}></img>
     }else if(error){
       return <div>{error}</div>
     }else return ""

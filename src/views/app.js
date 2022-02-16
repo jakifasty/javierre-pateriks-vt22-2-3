@@ -15,9 +15,9 @@ function App(props){
                 {/* TODO TW1.2 Sidebar will be added here, inside a DIV, like Summary below */}
                 <div  class="sidebar">
                   <Sidebar model={props.model} />
+                  <Summary model={props.model} />
                 </div>
                 <div  class="mainContent">
-                  <Summary model={props.model} />
                   <Search model={props.model} />
                   <Details model={props.model} />
                 </div>

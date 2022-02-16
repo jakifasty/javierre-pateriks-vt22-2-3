@@ -13,7 +13,7 @@ function DetailsView(props){
                   <div class="detailsprice">
                   Price {props.dishData.pricePerServing.toFixed(2)}
                   <p></p>
-                  For {props.guests} {(props.dishData.pricePerServing*props.guests).toFixed(2)}
+                  For {props.guests}: {(props.dishData.pricePerServing*props.guests).toFixed(2)}
                   </div>
                 </span>
                 <span>
