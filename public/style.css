@@ -14,7 +14,6 @@
   text-align: center;
   padding: 50px;
   width: 100px;
-  height: 100px;
   vertical-align: text-top;
 }
 .details {
@@ -30,13 +29,12 @@
 .sidebar{
   display: inline-block;
   flex: 0.1;
-  height: 100%; /* Full-height: remove this if you want "auto" height */
   width: 400px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 0; /* Stay on top */
   top: 0; /* Stay at the top */
   left: 0;
-  background-color:; /* Black */
+  background-color:;
   overflow-x: hidden; /* Disable horizontal scroll */
   padding-top: 20px;
 }
@@ -51,9 +49,6 @@
       .flexParent{
         display:flex;
         flex-direction: row;
-        min-height: 10em;
         width: 100%;
-        height:200px
-        margin: 0 auto;
         padding: 20px;}
 }

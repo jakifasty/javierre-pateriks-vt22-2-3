@@ -10,10 +10,8 @@ function Search(props){
   function searchACB(input){
     props.model.setSearchQuery(input);
   }
-  function choicesACB(event){
-    console.log(event);
-    console.log(this.value);
-    props.model.setSearchType(knownTypes[this.value]);
+  function choicesACB(input){
+    props.model.setSearchType(input);
   }
   function chooseDishACB(dish){
     props.model.setCurrentDish(dish.id);
