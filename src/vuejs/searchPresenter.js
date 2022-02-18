@@ -17,7 +17,7 @@ function Search(props){
     props.model.setCurrentDish(dish.id);
   }
   if(!props.model.searchResultsPromiseState.promise){
-    props.model.doSearch({query:"foo", type:"bar"});
+    props.model.doSearch({});
   }
   return(
           <div>

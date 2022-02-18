@@ -28,7 +28,7 @@
 .search{}
 .sidebar{
   display: inline-block;
-  flex: 0.1;
+  flex: 0.4;
   width: 400px; /* Set the width of the sidebar */
   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
   z-index: 0; /* Stay on top */
@@ -43,7 +43,7 @@
   top:0px;
   left:400px;
   width:100%
-  flex: 0.9;
+  flex: 0.6;
 }
 @media (min-width: 400px){
       .flexParent{
