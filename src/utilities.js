@@ -173,4 +173,4 @@ function menuPrice(dishesArray){
   because the new function object is re-created and interpreted every time the enclosing function runs.
 */
 
-export {isKnownTypeCB, dishType, sortDishes, sortIngredients, shoppingList, menuPrice};
+export {isKnownTypeCB, dishType, sortDishes, sortIngredients, shoppingList, menuPrice, knownTypes};

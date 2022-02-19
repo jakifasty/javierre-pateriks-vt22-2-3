@@ -1,4 +1,4 @@
-import { menuPrice, dishType, sortDishes} from "../utilities"
+import { menuPrice, dishType, sortDishes} from "../utilities.js"
 function sidebarView(props){
     return (
             <div>

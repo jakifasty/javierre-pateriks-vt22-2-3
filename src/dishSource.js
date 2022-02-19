@@ -37,4 +37,20 @@ function searchDishes(params){ //taken from GET Search Recipes
 		}}).then(treatHTTPResponseACB).then(transformResultACB);
 }
 
+/*function myAPICall(apiParams){
+	const API_ROOT = 'https://rapidapi.com/'; //this is the server adress
+	//const apiParams = 
+
+	function getMyAPICall(argument) {
+		return fetch();
+	}
+
+	function updateMyAPICall(argument) {
+		return 
+	}
+
+	return fetch(API_ROOT + apiParams); 
+	// again, no catch, we let the caller of myAPICall catch and treat the error
+}*/
+
 export {getDishDetails, searchDishes};

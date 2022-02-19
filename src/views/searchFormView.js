@@ -5,22 +5,22 @@ import {treatHTTPResponseACB, transformResultACB, getDishDetails, searchDishes} 
 
 function SearchFormView(props) {
 
-	function clickSearchACB(){
-		props.searchDishes(props.name);
+	function dishOptions2JSX_CB(option){ 
+		return <option value={option}>{option}</option>; 
 	}
-
-	function dishOptions2JSX_CB(dishTypeOptions){ return <option>{dishTypeOptions}</option>; }      
 
 	return (
 			<div class="debug">
-				<input placeholder={"Input what you want..."}></input>
-				<select>
-					<option>
-						Choose:
-					</option>
-						{props.dishTypeOptions.map(dishOptions2JSX_CB)}
-				</select> 
-				<button onClick = {clickSearchACB}>Search!</button>
+				<div>
+					<input onchange={function (event){props.inputOnChange(this.value)}} placeholder={"Input what you want..."}></input>
+					<select onchange={function (event){props.typeOnChange(this.value)}}>
+						<option value="default">
+							Choose:
+						</option>
+							{props.dishTypeOptions.map(dishOptions2JSX_CB)}
+					</select> 
+					<button onClick = {props.onSearch}>Search!</button>
+				</div>
 			</div>
 	);
 }

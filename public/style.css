@@ -43,13 +43,28 @@
 
 }
 
-.detailsRow{
-    text-align:  center;
-
-  display: flex;
+.detailsColumn{
+    float: left;
+    width: 50%;
+    padding: 10px;
+    //flex: 50%;
 }
 
-.detailsColumn{
-    text-align:  center;
-    flex: 50%;
+.detailsRow: after{
+    content: "";
+    display: table;
+    clear: both;
+
+    //display: flex;
+}
+
+.border {
+        
+     border-style:  solid;
+     border-color:  #287EC7;
+}
+
+.imageGIF{
+    height:  100;
+    width:  100;
 }

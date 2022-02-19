@@ -1,6 +1,5 @@
 import render from "./teacherRender.js";
 
-
 // make webpack load the file only if it exists
 const X= TEST_PREFIX;
 
@@ -10,7 +9,7 @@ try{
     if(!DinnerModel.prototype.doSearch) throw "not defined";
 }catch(e){
     render(<div>
-             Please write DinnerModel.doSearch()
+             Please write DinnerModel.doSearch({})
            </div>,  document.getElementById('root'));
 }
 
@@ -21,7 +20,7 @@ if(DinnerModel.prototype.doSearch){
         } ,
         render(){
             if(!this.rootModel.searchResultsPromiseState.promise){
-                this.rootModel.doSearch();
+                this.rootModel.doSearch({});
             }
                 
 
