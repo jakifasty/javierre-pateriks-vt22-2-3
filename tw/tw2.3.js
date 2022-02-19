@@ -10,12 +10,12 @@ try{
 }catch(e){
     render(<div>Please define /src/views/searchFormView.js</div>,  document.getElementById('root'));
 }
-if(SearchFormView)    
+if(SearchFormView)
     render(
         <SearchFormView dishTypeOptions={["starter", "main course", "dessert"]}
-                        FIXMEcustomEvent1={function searchTextACB(text){ console.log("user wants to set the dish search text ", text); }}
-                        FIXMEcustomEvent2={function searchTypeCB(type){ console.log("user wants to set the dish search type ", type); }}
-                        FIXMEcustomEvent3={function searchNowACB(){ console.log("user wants to search now!"); }}
+                        search={function searchTextACB(text){ console.log("user wants to set the dish search text ", text); }}
+                        choise={function searchTypeCB(type){ console.log("user wants to set the dish search type ", type); }}
+                        click={function searchNowACB(){ console.log("user wants to search now!"); }}
         />,
         document.getElementById('root')
     );

@@ -200,12 +200,18 @@ describe("TW2.5 SearchPresenter", function () {
       "SearchFormView fires its custom event correctly"
     );
 
+<<<<<<< HEAD
     let buttons = div.querySelectorAll("button");
     expect(buttons.length).to.be.gte(1, "expected 1 or more buttons");
     let searchButtons = Array.from(buttons).filter(
       (btn) =>
         btn.textContent && btn.textContent.toLowerCase().includes("search")
     );
+=======
+    let buttons = div.querySelectorAll('button');
+    expect(buttons.length).to.be.gte(1, "expected 1 or more buttons");
+    let searchButtons = Array.from(buttons).filter(btn => btn.textContent && btn.textContent.toLowerCase().includes("search"));
+>>>>>>> 52c62853d00c39c1985886e5ef82b30e193bdacd
     expect(searchButtons.length).to.equal(1, "expected 1 search button");
     searchButtons[0].click();
     expect(search).to.equal(
@@ -246,10 +252,14 @@ describe("TW2.5 SearchPresenter", function () {
     });
     expect(oneHandler.length).to.equal(1, "expected 2 props in total");
     oneHandler = oneHandler[0];
+<<<<<<< HEAD
     expect(
       typeof SearchResultsViewProps[oneHandler],
       "expected prop to be a function"
     ).to.equal("function");
+=======
+    expect(typeof SearchResultsViewProps[oneHandler], "expected prop to be a function").to.equal("function");
+>>>>>>> 52c62853d00c39c1985886e5ef82b30e193bdacd
 
     dishId = undefined;
     SearchResultsViewProps[oneHandler]({ id: 1 });

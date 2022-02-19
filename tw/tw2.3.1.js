@@ -22,7 +22,7 @@ if(searchDishes && SearchResultsView){
         function testACB(results){
             render(
                 <SearchResultsView searchResults={results}
-                                   FIXMEcustomEvent3={function resultChosenACB(searchResult){ console.log("user chose searchResult: ", JSON.stringify(searchResult)); }}
+                                   choise={function resultChosenACB(searchResult){ console.log("user chose searchResult: ", JSON.stringify(searchResult)); }}
                 />
                 , document.getElementById('root')
             );
