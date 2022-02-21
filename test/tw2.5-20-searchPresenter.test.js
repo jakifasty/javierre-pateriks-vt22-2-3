@@ -143,9 +143,6 @@ describe("TW2.5 SearchPresenter", function () {
         searched || text || type,
         "custom events handlers should call appropriate model methods"
       );
-      console.log("Searched" + searched);
-            console.log("Text" + text);
-                  console.log("Type" + type);
       // getting names of handlers
       if (searched) {
         foundOnSearch = searched;

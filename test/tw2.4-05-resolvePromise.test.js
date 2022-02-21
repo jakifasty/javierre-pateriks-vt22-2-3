@@ -24,7 +24,8 @@ describe('TW2.4 resolvePromise', function () {
 
     expect(function () {
       resolvePromise(null, promiseState);
-    }).to.not.throw();
+    }, "did you check whether promise is null?"
+          ).to.not.throw();
   });
 
     it('resolvePromise sets data after the promise resolves', async function () {
@@ -36,7 +37,7 @@ describe('TW2.4 resolvePromise', function () {
         await sleep(11);
         expect(promiseState.promise, "promiseState.promise should be set").to.be.ok;
         expect(promiseState.data, "promiseState.data should be set when the promise resolves").to.equal(42);
-        expect(promiseState.error, "promiseState.data should remain null when the promise resolves").to.be.null;
+        expect(promiseState.error, "promiseState.error should remain null when the promise resolves").to.be.null;
         
     });
 
