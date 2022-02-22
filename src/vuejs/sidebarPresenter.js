@@ -1,9 +1,23 @@
-import SidebarView from "../views/sidebarView.js";
+//sidebarPresenter.js file
+import SidebarView from "../views/sidebarView.js"; //sidebarPresenter.js file
 
 export default
 function Sidebar(props){
-    function numberChangeACB(nr){props.model.setNumberOfGuests(nr);}
-    function removeDishACB(dish){props.model.removeFromMenu(dish,);}
-    function setCurrentDishACB(dish){props.model.setCurrentDish(dish.id);}
-    return <SidebarView number={props.model.numberOfGuests} onNumberChange={numberChangeACB} dishes={props.model.dishes} setCurrentDish={setCurrentDishACB} onRemove={removeDishACB}/>;
+
+    function onNumberChangeACB(number){ //added function
+        props.model.setNumberOfGuests(number);
+    }
+
+    function removeDishACB(dish){ //added function to remove a dish from the menu
+        props.model.removeFromMenu(dish); //this passes the 
+    }
+
+    function setCurrentDishACB(dish){ //added function to add a dish to the menu
+        props.model.setCurrentDish(dish.id); //this passes the ID of the dish
+    }
+
+    //return <SidebarView number={props.model.numberOfGuests} ingredients={[] /* empty array for starters */}/>;
+    return <SidebarView onNumberChange={onNumberChangeACB} number={props.model.numberOfGuests} dishes={props.model.dishes} 
+             removeFromMenu={removeDishACB} currentDish={setCurrentDishACB}/>; //numberChangeACB should invoke the appropiate method of the model
+    //removeFromMenu and currentDish are custom event handlers
 }

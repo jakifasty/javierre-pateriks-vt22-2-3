@@ -183,8 +183,4 @@ function isDishInMenu(dishes, dish_id){
   because the new function object is re-created and interpreted every time the enclosing function runs.
 */
 
-<<<<<<< HEAD
 export {isKnownTypeCB, dishType, sortDishes, sortIngredients, shoppingList, menuPrice, knownTypes};
-=======
-export {isKnownTypeCB, isDishInMenu, dishType, sortDishes, sortIngredients, shoppingList, menuPrice};
->>>>>>> 52c62853d00c39c1985886e5ef82b30e193bdacd

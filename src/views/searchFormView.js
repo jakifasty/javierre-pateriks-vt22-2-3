@@ -9,11 +9,17 @@ function SearchFormView(props) {
 		return <option value={option}>{option}</option>; 
 	}
 
+	/*function clickButtonOnSearchCB(){
+		return props.mode.onSearch();
+			props.model.doSearch(props.model.searchParams);
+			props.model.searchParams
+	}*/
+
 	return (
 			<div class="debug">
 				<div>
-					<input onchange={function (event){props.inputOnChange(this.value)}} placeholder={"Input what you want..."}></input>
-					<select onchange={function (event){props.typeOnChange(this.value)}}>
+					<input onchange={function valueInputOnChnageACB(event){props.inputOnChange(event.target.value)}} placeholder={"Input what you want..."}></input>
+					<select onchange={function valueTypeOnChangeACB(event){props.typeOnChange(event.target.value)}}>
 						<option value="default">
 							Choose:
 						</option>

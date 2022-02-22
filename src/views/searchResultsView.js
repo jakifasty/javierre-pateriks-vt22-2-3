@@ -7,9 +7,11 @@ function SearchResultsView(props){
 		console.log(event.target.value);
 	}
 
+	//onClickCapture={props.onChangeDish}
+
 	function viewResultImages2JSX_CB(dish){
-		return (<span class="searchResults"> 
-					<img src={"https://spoonacular.com/recipeImages/" + dish.image} height="100"  onClickCapture={props.onChangeDish}></img>
+		return (<span onClickCapture={function choseDishACB(event){props.onChangeDish(dish)}} class="searchResults"> 
+					<img src={"https://spoonacular.com/recipeImages/" + dish.image} height="100"></img>
 					<div class="left">
 						{dish.title}
 					</div>

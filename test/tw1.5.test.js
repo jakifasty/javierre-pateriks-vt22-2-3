@@ -220,14 +220,7 @@ describe("TW1.5 Array rendering", function() {
         
         expect(buttonPressed).to.equal(getDishDetails(1), "SidebarView fires custom events links and sends a dish as parameter");      
     });
-    
     it("Integration test: pressing UI X buttons removes dishes in Model", async function(){
-        let turnOff;
-        const Guard={
-            data(){ return {state:true};},
-            render(){return this.state && this.$slots.default();},
-            created(){ turnOff= ()=> this.state=false; },
-        };
 
         window.React={createElement:h};
         let div= createUI();
@@ -240,10 +233,9 @@ describe("TW1.5 Array rendering", function() {
                 }
             });
         };
-        window.location.hash="summary";
+
         try{
-        try{
-            render(<Guard><VueRoot /></Guard>,div);
+        render(<VueRoot />,div);
         }finally{ window.fetch=oldFetch; }
         
         let myModel= require("/src/vuejs/"+TEST_PREFIX+"VueRoot.js").proxyModel;
@@ -266,18 +258,9 @@ describe("TW1.5 Array rendering", function() {
 
         await new Promise(resolve => setTimeout(resolve));  // need to wait a bit for UI to update...
         expect(sidebar.querySelectorAll("button").length).to.equal(4, "There should be 4 buttons after deletion: +, - and 2 X for dishes");
-
-        }finally{turnOff();}  // remove VueRoot and the app from the UI to make sure hashchange (navigation) listeners are removed
     });
 
     it("Integration test: clicking on dish names sets model.currentDish", async function(){
-        let turnOff;
-        const Guard={
-            data(){ return {state:true};},
-            render(){return this.state && this.$slots.default();},
-            created(){ turnOff= ()=> this.state=false; },
-        };
-
         window.React={createElement:h};
 
         let div= createUI();
@@ -293,8 +276,7 @@ describe("TW1.5 Array rendering", function() {
         };
 
         try{
-        try{
-            render(<Guard><VueRoot /></Guard>,div);
+        render(<VueRoot />,div);
         }finally{ window.fetch=oldFetch; }
 
         let myModel= require("/src/vuejs/"+TEST_PREFIX+"VueRoot.js").proxyModel;
@@ -321,6 +303,5 @@ describe("TW1.5 Array rendering", function() {
             div.querySelectorAll("a")[1].click();
             expect(myModel.currentDish).to.equal(100);
         }finally{ window.fetch=oldFetch; window.location.hash=""; }
-        }finally{turnOff();}   // remove VueRoot and the app from the UI to make sure hashchange (navigation) listeners are removed
     });
 });

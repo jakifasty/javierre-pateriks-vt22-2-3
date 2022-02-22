@@ -26,15 +26,17 @@ function Search(props){
     }
 
     function changeDishOnClickACB(dish){ //to look up for another specific dish when inputing a string (1st element)
-        //console.log(dish);
+        console.log(dish);
         props.model.setCurrentDish(dish.id);
     }
 
 
-    if(!props.model.searchResultsPromiseState.promise) {props.model.doSearch({});}
+    if(!props.model.searchResultsPromiseState.promise) {props.model.doSearch({promise: "foo",
+          data: "bar"});}
     return (<div>
                 <SearchFormView dishTypeOptions={knownTypes} onSearch={clickButtonACB} inputOnChange={inputOnChangeACB} typeOnChange={setTypeOnSearchACB} />
-                {promiseNoData(props.model.searchResultsPromiseState) || <SearchResultsView searchResults = {props.model.searchResultsPromiseState.data} onChangeDish={changeDishOnClickACB}/>}
+                {promiseNoData(props.model.searchResultsPromiseState) || 
+                <SearchResultsView searchResults = {props.model.searchResultsPromiseState.data} onChangeDish={changeDishOnClickACB}/>}
             </div>
     );
 }

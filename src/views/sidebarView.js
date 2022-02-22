@@ -14,9 +14,9 @@ function renderDishes(setDish, onRemove, dishes, number){
     function dishesTableRowCB(dish){
         return     <tr key={ /* TODO what's a key? */dish.id}>
                     <td>
-                      <button onClickCapture= {function clickACB(e){onRemove(dish);}}>x</button>
+                      <button onClickCapture= {function clickACB(e){props.onRemove(dish);}}>x</button>
                     </td>
-                    <td onClickCapture={function clickACB(e){setDish(dish);}}>
+                    <td onClickCapture={function clickACB(e){props.setDish(dish);}}>
                       <a href="#">{dish.title}</a>
                     </td>
                     <td>
