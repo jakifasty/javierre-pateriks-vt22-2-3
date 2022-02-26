@@ -11,6 +11,7 @@ function SummaryView(props){
                    /* TODO uncomment this at TW1.5, it won't work before because props.ingredinets is not set.
                        renderIngredients(props.ingredients, props.people) */
                 }
+                <button onClick={function(e){window.location.hash="search"}}>Back to search</button>
             </div>
     );
 }

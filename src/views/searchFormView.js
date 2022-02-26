@@ -1,20 +1,23 @@
 function SearchFormView(props){
   function listCB(option, index){
-    return <option value={option}>{option}</option>;
+    return <option key={index+1} value={option}>{option}</option>;
   }
   return (
           <div>
               <div>
-                <input type="text" onchange = {function(event){props.search(this.value)}}>
+                <input type="text" onChange = {function(event){props.search(event.target.value)}}>
                 </input>
-                <select onchange = {function(event){props.choiceChangeACB(this.value)}}>
-                <option value="default">
+                <select onChange = {function(event){props.choiceChangeACB(event.target.value)}}>
+                <option key={0} value="default">
                 Choose:
                 </option>
                   {props.dishTypeOptions.map(listCB)}
                 </select>
-                <button onclick = {function(event){props.click()}}>
+                <button onClick = {function(event){props.click()}}>
                 Search!
+                </button>
+                <button onClick = {function(event){window.location.hash="summary"}}>
+                Summary
                 </button>
               </div>
           </div>

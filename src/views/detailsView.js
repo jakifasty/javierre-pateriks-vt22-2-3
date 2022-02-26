@@ -33,6 +33,9 @@ function DetailsView(props){
               <button onClickCapture={function clickACB(event){props.addToMenu()}} disabled={props.isDishInMenu}>
               Add to menu!
               </button>
+              <button onClickCapture={function(event){window.location.hash = "search"}}>
+              Cancel!
+              </button>
           </div>
   );
 }

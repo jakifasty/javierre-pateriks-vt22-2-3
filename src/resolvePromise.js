@@ -4,18 +4,21 @@ function resolvePromise (promiseToResolve, promiseState, notifyACB){
   promiseState.promise=promiseToResolve;
   promiseState.data= null;
   promiseState.error= null;
+  console.log(notifyACB);
   if(notifyACB) notifyACB();
   function saveDataACB(result) {
     if(promiseState.promise !== promiseToResolve) return;
     /* TODO save results in promiseState, as before */
     promiseState.data = result;
     /* TODO Notify */
+    if(notifyACB) notifyACB();
   }
   function saveErrorACB(err) {
     if(promiseState.promise !== promiseToResolve) return;
     /* TODO save error in promiseState, as before */
     promiseState.error = err;
     /* TODO Notify */
+    if(notifyACB) notifyACB();
   }
   promiseToResolve.then(saveDataACB).catch(saveErrorACB);
 }
