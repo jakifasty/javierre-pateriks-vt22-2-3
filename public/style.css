@@ -13,6 +13,7 @@
   text-align: center;
 }
 .searchResults {
+  cursor: pointer;
   display: inline-block;
   text-align: center;
   margin: 100px;
