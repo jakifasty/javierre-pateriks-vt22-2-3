@@ -5,6 +5,7 @@ import  {searchDishes, getDishDetails} from "../dishSource.js";
 const knownTypes=["starter", "main course", "dessert"];
 export default
 function Search(props){
+
   const [promise, setPromise]=React.useState();
   const [query, setQuery]=React.useState("");
   const [type, setType]=React.useState("");
@@ -12,8 +13,12 @@ function Search(props){
   const [error, setError]= React.useState([]);
 
   function observerACB(){
-    setQuery(props.model.searchParams.query);
-    setType(props.model.searchParams.type);
+    if(props.model.searchParams){
+      if(props.model.searchParams.query & props.model){
+        setQuery(props.model.searchParams.query);
+        setType(props.model.searchParams.type);
+      }
+    }
   }
   function wasCreatedACB(){
     observerACB();
@@ -34,23 +39,17 @@ function Search(props){
   React.useEffect(promiseChangedACB , [promise] );
 
   if(!promise){
-    console.log("setting init promise");
     setPromise(searchDishes({}))
   }else{
-    console.log("Promise", promise);
-    console.log("Data", data);
   }
   function clickACB(){
-    console.log(query, type);
-    setPromise(searchDishes({query: query, type: type}))
+    setPromise(searchDishes({query: query, type: type}));
     //props.model.doSearch({query: props.model.searchParams.query, type: props.model.searchParams.type});
   }
   function searchACB(input){
-    console.log(input);
     setQuery(input);
   }
   function choicesACB(input){
-    console.log(input);
     setType(input);
   }
   function chooseDishACB(dish){

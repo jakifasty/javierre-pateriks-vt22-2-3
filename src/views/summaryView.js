@@ -2,16 +2,23 @@ import { sortIngredients, sortDishes } from "../utilities"
 /* Functional JSX component. Name starts with capital letter */
 function SummaryView(props){
     return (
-            <div class="debug">
+            <div>
+                <table>
+                <td>
                 Summary for <span title="nr guests">{props.people}</span> persons:
-
+                </td>
+                <td width="100px">
+                </td>
+                <td>
+                <button onClick={function(e){window.location.hash="search"}}>Back to search</button>
+                </td>
+                </table>
                 {  //  <---- we are in JSX; with this curly brace, we go back to JavaScript, and can write JS code and comments.
                    // Then we can come back to JSX <tags>
                   renderIngredients(props.ingredients, props.people)
                    /* TODO uncomment this at TW1.5, it won't work before because props.ingredinets is not set.
                        renderIngredients(props.ingredients, props.people) */
                 }
-                <button onClick={function(e){window.location.hash="search"}}>Back to search</button>
             </div>
     );
 }

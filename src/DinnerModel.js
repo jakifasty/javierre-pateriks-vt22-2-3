@@ -13,7 +13,7 @@ class DinnerModel{
         this.dishes= dishArray;
         this.searchResultsPromiseState = {};
         this.currentDishPromiseState = {};
-        this.searchParams = {};
+        this.searchParams = {query: "", type: ""};
     }
     notifyObservers(payload){
       function invokeObserverCB(obs){
@@ -74,9 +74,8 @@ class DinnerModel{
       if(toRemove.length == 0){
 
       }else{
-        this.notifyObservers({removeDish: dishToRemove});
         this.dishes= this.dishes.filter(function notSameIdCB(dish){return dishToRemove.id !== dish.id;});/*TODO pass the callback!*/
-
+        this.notifyObservers({removeDish: dishToRemove});
       }
     }
 
@@ -112,8 +111,8 @@ class DinnerModel{
 
        }else{
          //notifyObservers({removeDish: id});
-         this.dishes= this.dishes.filter(function notSameIdCB(){return id !== dish.id;});
-
+         this.dishes= this.dishes.filter(function notSameIdCB(dish){return id !== dish.id;});
+         this.notifyObservers({removeDish: id});
        }
        // the test "can remove dishes" should pass
      }

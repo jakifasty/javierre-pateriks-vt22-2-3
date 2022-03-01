@@ -1,4 +1,7 @@
 /* A debug class, used to separate components graphically during development */
+* {
+  box-sizing: border-box;
+}
 .debug {
     border-style:solid;
     width: auto;
@@ -12,12 +15,11 @@
 .searchResults {
   display: inline-block;
   text-align: center;
-  padding: 50px;
-  width: 100px;
+  margin: 100px;
+  width: 200px;
   vertical-align: text-top;
 }
 .details {
-  padding: 20px;
   width: 100%;
 }
 .detailsprice {
@@ -45,13 +47,32 @@
   width:100%
   flex: 0.6;
 }
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30px;
+}
+
+.flex-item-left {
+  display: inline-block;
+  background-color: #f1f1f1;
+  padding: 10px;
+  flex: 30%;
+}
+
+.flex-item-right {
+  background-color: dodgerblue;
+  padding: 10px;
+  flex: 70%;
+}
+
+/* Responsive layout - makes a one column-layout instead of a two-column layout */
+@media (max-width: 1200px) {
+  .flex-item-right, .flex-item-left {
+    flex: 100%;
+  }
+}
 .hidden{
   display: none;
-}
-@media (min-width: 400px){
-      .flexParent{
-        display:flex;
-        flex-direction: row;
-        width: 100%;
-        padding: 20px;}
 }

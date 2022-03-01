@@ -4,7 +4,6 @@ function resolvePromise (promiseToResolve, promiseState, notifyACB){
   promiseState.promise=promiseToResolve;
   promiseState.data= null;
   promiseState.error= null;
-  console.log(notifyACB);
   if(notifyACB) notifyACB();
   function saveDataACB(result) {
     if(promiseState.promise !== promiseToResolve) return;

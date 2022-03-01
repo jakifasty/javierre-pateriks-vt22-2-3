@@ -4,6 +4,21 @@ function DetailsView(props){
   }
   return (
           <div>
+              <table>
+              <tmain>
+              <tr width="100%">
+              <td>
+              <button onClickCapture={function clickACB(event){props.addToMenu()}} disabled={props.isDishInMenu}>
+              Add to menu!
+              </button>
+              </td>
+              <td width="400px"></td>
+              <td>
+              <button onClickCapture={function(event){window.location.hash = "search"}}>Cancel!</button>
+              </td>
+              </tr>
+              </tmain>
+              </table>
               <span class="details">
                 <span>
                 <h1>{props.dishData.title}</h1>
@@ -30,12 +45,6 @@ function DetailsView(props){
                 </p>
                 </span>
               </span>
-              <button onClickCapture={function clickACB(event){props.addToMenu()}} disabled={props.isDishInMenu}>
-              Add to menu!
-              </button>
-              <button onClickCapture={function(event){window.location.hash = "search"}}>
-              Cancel!
-              </button>
           </div>
   );
 }
