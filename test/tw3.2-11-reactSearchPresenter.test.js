@@ -96,7 +96,6 @@ describe("TW3.2 React (stateful) Search presenter", function tw3_2_11() {
         checkResults(div, searchResults);
         expect(compressHistory(resultsProps).length, "initially search presenter displays an image, then the promise results").to.equal(2);
         expect(compressHistory(formProps).length, "initially search presenter displays an image, then the promise results").to.equal(1);
-
         expect(resultsProps.slice(-1)[0][resultChosen],  "expected the SearchResultsView "+resultChosen+" custom event handler prop to be set. Are you setting correct props?").to.be.a("Function");
         resultsProps.slice(-1)[0][resultChosen]({id:42});
         expect(currentDishId, "clicking on a search results should set the current dish in the model").to.equal(42);

@@ -8,13 +8,13 @@ function DetailsView(props){
               <tmain>
               <tr width="100%">
               <td>
-              <button onClickCapture={function clickACB(event){props.addToMenu()}} disabled={props.isDishInMenu}>
+              <button onClick={function clickACB(event){window.location.hash = "search"; props.addToMenu();}} disabled={props.isDishInMenu}>
               Add to menu!
               </button>
               </td>
               <td width="400px"></td>
               <td>
-              <button onClickCapture={function(event){window.location.hash = "search"}}>Cancel!</button>
+              <button onClick={function clickACB(event){window.location.hash = "search";}}>Cancel!</button>
               </td>
               </tr>
               </tmain>

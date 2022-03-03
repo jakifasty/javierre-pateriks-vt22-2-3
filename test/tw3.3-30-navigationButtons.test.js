@@ -25,7 +25,7 @@ describe("TW3.3 Navigation buttons in views", function tw_3_3_30() {
          const rendering= require("../src/views/" + X + "summaryView.js").default({people:2, ingredients:[]});
          const buttons=findTag("button", rendering);
          expect(buttons.length).to.equal(1);
-         
+
          window.location.hash="summary";
          buttons[0].props.onClick();
          await new Promise(resolve => setTimeout(resolve));
@@ -35,7 +35,7 @@ describe("TW3.3 Navigation buttons in views", function tw_3_3_30() {
     it("DetaillsView should have a button leading to search without adding the dish",  async function  tw_3_3_30_2() {
         installOwnCreateElement();
         const rendering= require("../src/views/" + X + "detailsView.js").default( {isDishInMenu:true, guests:2, dishData:dishInformation});
-        
+
         const buttons=findTag("button", rendering).filter(function(button){ return !button.props.disabled; });
         expect(buttons.length, "DetailsView expected to have one single enabled (navigation) button if dish is in menu").to.equal(1);
 
@@ -44,7 +44,7 @@ describe("TW3.3 Navigation buttons in views", function tw_3_3_30() {
         await new Promise(resolve => setTimeout(resolve));
         expect(window.location.hash, "Details navigation button should navigate to search").to.equal("#search");
     });
-    
+
     it("DetaillsView dish adding button should lead to search",  async function  tw_3_3_30_3() {
         const {clickables, rendering}= prepareViewWithCustomEvents(
             require("../src/views/" + X + "detailsView.js").default,
@@ -54,7 +54,7 @@ describe("TW3.3 Navigation buttons in views", function tw_3_3_30() {
                 expect(buttons.length, "DetailsView expected to have one single disabled (add to menu) button if dish is in menu").to.equal(1);
                 return buttons;
             });
-
+        console.log(clickables[0].props)
         window.location.hash="summary";
         clickables[0].props.onClick();
         await new Promise(resolve => setTimeout(resolve));
@@ -75,7 +75,7 @@ describe("TW3.3 Navigation buttons in views", function tw_3_3_30() {
         if(hrefs.length==0)
             // all links have the correct href
             return;
-        
+
         const {clickables, rendering}= prepareViewWithCustomEvents(
             require("../src/views/" + X + "sidebarView.js").default,
             { number:2, dishes:[dishInformation]},
@@ -109,4 +109,3 @@ describe("TW3.3 Navigation buttons in views", function tw_3_3_30() {
         }));
     });
 });
-

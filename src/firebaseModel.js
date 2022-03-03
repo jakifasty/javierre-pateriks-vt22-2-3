@@ -11,7 +11,7 @@ function updateFirebaseFromModel(model){
       if(payload.numberOfGuests){
         firebase.database().ref(REF+"/numberOfGuests").set(payload.numberOfGuests);
       }
-      if(payload.setCurrentDish) firebase.database().ref(REF+"/setCurrentDish").set(payload.currentDish);
+      if(payload.setCurrentDish) firebase.database().ref(REF+"/setCurrentDish").set(model.currentDish);
       if(payload.addDish && payload.addDish.id) firebase.database().ref(REF+"/menuDishes/"+payload.addDish.id).set(payload.addDish);
       if(payload.removeDish && payload.removeDish.id) firebase.database().ref(REF+"/menuDishes/"+payload.removeDish.id).set(null);
     }
@@ -51,9 +51,8 @@ function updateModelFromFirebase(model){
 function firebaseModelPromise(){
   function makeBigPromiseACB(firebaseData){
     function createModelACB(dishes){
-      numberOfGuests = firebaseData.val().numberOfGuests? firebaseData.val().numberOfGuests : 1;
+      let numberOfGuests = firebaseData.val().numberOfGuests? firebaseData.val().numberOfGuests : 1;
       return new DinnerModel(numberOfGuests, dishes);
-
     }
     function makeDishPromiseCB(dishId){
       return getDishDetails(dishId);

@@ -16,8 +16,8 @@ function Sidebar(props){
     React.useEffect(wasCreatedACB, []);
 
     function numberChangeACB(nr){props.model.setNumberOfGuests(nr);}
-    function removeDishACB(dish){props.model.removeFromMenu(dish,);}
-    function setCurrentDishACB(dish){props.model.setCurrentDish(dish.id); window.location.hash = "details";}
+    function removeDishACB(dish){props.model.removeFromMenu(dish);}
+    function setCurrentDishACB(dish){props.model.setCurrentDish(dish.id);}
 
     return <SidebarView number={props.model.numberOfGuests}
                         onNumberChange={numberChangeACB}

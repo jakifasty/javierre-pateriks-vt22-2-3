@@ -33,14 +33,14 @@ function sidebarView(props){
 }
 
 
-function renderDishes(setDish, onRemove, dishes, number){
+function renderDishes(setCurrentDish, onRemove, dishes, number, onTitle){
     function dishesTableRowCB(dish){
         return     <tr key={ /* TODO what's a key? */dish.id}>
                     <td>
-                      <button onClickCapture= {function clickACB(e){onRemove(dish);}}>x</button>
+                      <button onClick= {function clickACB(e){onRemove(dish);}}>x</button>
                     </td>
-                    <td onClickCapture={function clickACB(e){setDish(dish);}}>
-                      <a href="#details">{dish.title}</a>
+                    <td>
+                      <a onClick={function clickACB(e){setCurrentDish(dish);}} href="#details">{dish.title}</a>
                     </td>
                     <td>
                       {dishType(dish)}

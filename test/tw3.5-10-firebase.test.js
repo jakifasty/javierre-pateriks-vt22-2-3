@@ -44,11 +44,11 @@ async function findKeys(){
     firebaseModel.updateFirebaseFromModel(model);
     model.setNumberOfGuests(3);
     const numberKey= Object.keys(firebaseData)[0];
-    
+
     firebaseData={};
     await withMyFetch(myDetailsFetch, function(){ model.setCurrentDish(8);});
     const currentDishKey= Object.keys(firebaseData)[0];
-    
+
     firebaseData={};
     model.addToMenu(dishInformation);
     const dishesKey= Object.keys(firebaseData)[0].replace("/1445969", "");
@@ -61,15 +61,15 @@ try {
 
 describe("TW3.5 Firebase-model", function tw3_5_10() {
     this.timeout(200000); // increase to allow debugging during the test run
-    
+
     before(function () {
         if (!firebaseModel) this.skip();
     });
     it("model saved to firebase", async function tw3_5_10_1() {
         const DinnerModel= require('../src/'+TEST_PREFIX+'DinnerModel.js').default;
-        firebaseData={};        
+        firebaseData={};
         const model= new DinnerModel();
-        
+
         firebaseModel.updateFirebaseFromModel(model);
 
         expect(firebaseData, "no data should be set in firebase by updateFirebaseFromModel").to.be.empty;
@@ -84,22 +84,22 @@ describe("TW3.5 Firebase-model", function tw3_5_10() {
         model.setNumberOfGuests(5);
         expect(firebaseData, "no data should be set in firebase if number of guests is set to its existing value ").to.be.empty;
 
-        firebaseData={};        
+        firebaseData={};
         await withMyFetch(myDetailsFetch, function(){ model.setCurrentDish(7);});
-        
+
         data= Object.values(firebaseData);
         expect(data.length, "setting current dish should set a single firebase property").to.equal(1);
         expect(data[0], "current dish id saved correctly").to.equal(7);
         const currentDishKey=Object.keys(firebaseData)[0];
-        expect(currentDishKey, "firebase paths for number of guests and current dish must be different").to.not.equal(numberKey); 
-        
+        expect(currentDishKey, "firebase paths for number of guests and current dish must be different").to.not.equal(numberKey);
+
         firebaseData={};
         myDetailsFetch.lastFetch=undefined;
         await withMyFetch(myDetailsFetch, function(){ model.setCurrentDish(7);});
 
         expect(myDetailsFetch.lastFetch, "no fetch expected if currentDish is set to its existing value").to.not.be.ok;
         expect(firebaseData, "no data should be set in firebase if currentDish is set to its existing value ").to.be.empty;
-        
+
         firebaseData={};
         model.addToMenu(dishInformation);
         data= Object.keys(firebaseData);
@@ -135,11 +135,11 @@ describe("TW3.5 Firebase-model", function tw3_5_10() {
             setNumberOfGuests(x){ nguests=x;} ,
             setCurrentDish(x){ currentDish=x;} ,
             addToMenu(x){ dishAdded=x;} ,
-            removeFromMenu(x){ dishRemoved=x;} ,
+            removeDish(x){ dishRemoved=x;} ,
         };
-        
+
         firebaseModel.updateModelFromFirebase(mockModel);
-        
+
         expect(Object.keys(firebaseEvents.value).length, "two value listeners are needed: number of guests and current dish").to.equal(2);
         expect(firebaseEvents.value[numberKey], "there should be an on() value listener for the number of guests").to.be.ok;
         expect(firebaseEvents.value[currentDishKey], "there should be an on() value listener for the current dish").to.be.ok;
@@ -153,7 +153,7 @@ describe("TW3.5 Firebase-model", function tw3_5_10() {
 
         firebaseEvents.value[currentDishKey]({val(){ return 8;}});
         expect(currentDish, "callback passed to on() value listener for current dish should change the current dish").to.equal(8);
-        
+
         myDetailsFetch.lastFetch=undefined;
         await withMyFetch(myDetailsFetch, function(){firebaseEvents.child_added[dishesKey]({key:"3214", val(){ return "blabla";}});});
 
@@ -179,7 +179,7 @@ describe("TW3.5 Firebase-model", function tw3_5_10() {
         const num= numberKey.slice(root.length);
         const dishes= dishesKey.slice(root.length);
         const currentDish= currentDishKey.slice(root.length);
-        
+
         firebaseDataForOnce={
             [num]:7,
             [dishes]:{
@@ -209,11 +209,10 @@ describe("TW3.5 Firebase-model", function tw3_5_10() {
 
 function longestCommonPrefix(strs) {
     if (strs === undefined || strs.length === 0) { return ''; }
-    
+
     return strs.reduce((prev, next) => {
         let i = 0;
         while (prev[i] && next[i] && prev[i] === next[i]) i++;
         return prev.slice(0, i);
     });
 };
-

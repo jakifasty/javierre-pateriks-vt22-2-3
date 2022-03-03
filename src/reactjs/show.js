@@ -4,11 +4,10 @@ function Show(props){
   function hashListenerACB(){ setHash(window.location.hash);}
   function wasCreatedACB(){
       window.addEventListener("hashchange", hashListenerACB);   // 1 subscribe
-      function tearDownACB(){ window.removeEventListener("hashchange", listener); }
+      function tearDownACB(){ window.removeEventListener("hashchange", hashListenerACB); }
       return tearDownACB;
   }
   React.useEffect(wasCreatedACB, []);
-  console.log(hashState, props.hash);
-  let classe = (hashState === props.hash)? "" : "hidden";
-  return <div class={classe}>{props.children}</div>
+  let clas = (hashState === props.hash)? "" : "hidden";
+  return <div class={clas}>{props.children}</div>
 }

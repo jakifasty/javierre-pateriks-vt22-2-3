@@ -25,9 +25,11 @@ function Details(props){
     React.useEffect(wasCreatedACB, []);
 
     function addToMenueACB(){props.model.addToMenu(props.model.currentDishPromiseState.data); window.location.hash = "search";}
+    function cancelACB(){window.location.hash = "search"};
     return (promiseNoData(props.model.currentDishPromiseState) || <DetailsView
     guests={props.model.numberOfGuests}
     dishData={props.model.currentDishPromiseState.data}
     isDishInMenu={isDishInMenu(props.model.dishes, props.model.currentDish)}
-    addToMenu={addToMenueACB}/>);
+    addToMenu={addToMenueACB}
+    cancel={cancelACB}/>)
 }

@@ -52,11 +52,11 @@ describe("TW3.2 React Sidebar presenter (observer)", function tw_3_2_40() {
         React.useEffect(()=> turnOff=()=>setState(false), []);
         return state && props.children;
     }
-    
+
     let currentDishId;
     let removedDish;
     let nrGuests;
-    
+
     let observers=[];
     const model={
         dishes: [dishInformation],
@@ -66,13 +66,13 @@ describe("TW3.2 React Sidebar presenter (observer)", function tw_3_2_40() {
         setCurrentDish(id){ currentDishId=id; },
         removeFromMenu(dish){ removedDish=dish; },
         setNumberOfGuests(x){nrGuests=x;},
-    };    
+    };
     function doRender(){
         const div= document.createElement("div");
         window.React=React;
         React.createElement= replaceViews;
         propsHistory.length=0;
-        
+
         render(<Guard><SidebarPresenter model={model}/></Guard>, div);
         return div;
     }
@@ -88,9 +88,11 @@ describe("TW3.2 React Sidebar presenter (observer)", function tw_3_2_40() {
     }
     it("Sidebar presenter renders view with correct props", async function tw_3_2_40_1(){
         const[setCurrent, setNumber, remove]=findSidebarEventNames();
+        console.log(setCurrent, setNumber, remove);
         doRender();
-        await new Promise(resolve => setTimeout(resolve));  
+        await new Promise(resolve => setTimeout(resolve));
         checkAgainstModel();
+        console.log(propsHistory.slice(-1));
         expect(propsHistory.slice(-1)[0][setCurrent], "callback prop must be a function").to.be.a("Function");
         expect(propsHistory.slice(-1)[0][setNumber], "callback prop must be a function").to.be.a("Function");
         expect(propsHistory.slice(-1)[0][remove], "callback prop must be a function").to.be.a("Function");
@@ -110,23 +112,23 @@ describe("TW3.2 React Sidebar presenter (observer)", function tw_3_2_40() {
         model.numberOfGuests=3;
         model.dishes=[dishInformation, {... dishInformation, id:42}];
         observers.forEach(o=>o());
-        await new Promise(resolve => setTimeout(resolve));  
+        await new Promise(resolve => setTimeout(resolve));
         checkAgainstModel();
 
         model.dishes=[dishInformation, {... dishInformation, id:42}, {... dishInformation, id:43}];
         observers.forEach(o=>o());
-        await new Promise(resolve => setTimeout(resolve));  
+        await new Promise(resolve => setTimeout(resolve));
         checkAgainstModel();
 
         model.numberOfGuests=2;
         observers.forEach(o=>o());
-        await new Promise(resolve => setTimeout(resolve));  
+        await new Promise(resolve => setTimeout(resolve));
         checkAgainstModel();
     });
 
     it("Sidebar presenter removes observer subscriptions at teardown", async  function tw_3_2_40_3(){
         turnOff();
-        await new Promise(resolve => setTimeout(resolve));  
+        await new Promise(resolve => setTimeout(resolve));
         expect(observers.length, "observers should be unsubscribed at teardown").to.equal(0);
     });
 });

@@ -46,7 +46,7 @@ function makeRender(formProps, resultsProps, h, render, theReact, makeRoot){
     function DummyImg(props){
         resultsProps.push(1984);
         return "dummyIMG";
-    }    
+    }
     function replaceViews(tag, props, ...children){
         if(tag==require("../src/views/" + X + "searchFormView.js").default)
             return h(DummyForm, props, ...children);
@@ -62,7 +62,7 @@ function makeRender(formProps, resultsProps, h, render, theReact, makeRoot){
         window.React.createElement= replaceViews;
         formProps.length=0;
         resultsProps.length=0;
-        
+
         await withMyFetch(
             mySearchFetch,
             function theRender(){
@@ -70,7 +70,7 @@ function makeRender(formProps, resultsProps, h, render, theReact, makeRoot){
             },
             function makeResults(url){
                 return {results:searchResults};
-            }  
+            }
         );
         return div;
     };

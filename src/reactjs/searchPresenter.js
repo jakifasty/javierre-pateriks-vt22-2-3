@@ -12,18 +12,9 @@ function Search(props){
   const [data, setData]= React.useState([]);
   const [error, setError]= React.useState([]);
 
-  function observerACB(){
-    if(props.model.searchParams){
-      if(props.model.searchParams.query & props.model){
-        setQuery(props.model.searchParams.query);
-        setType(props.model.searchParams.type);
-      }
-    }
-  }
+
   function wasCreatedACB(){
-    observerACB();
-    props.model.addObserver(observerACB);
-    return function isTakenDownACB(){props.model.removeObserver(observerACB);}
+    setPromise(searchDishes({}))
   }
   React.useEffect(wasCreatedACB, []);
 
@@ -38,10 +29,6 @@ function Search(props){
     }
   React.useEffect(promiseChangedACB , [promise] );
 
-  if(!promise){
-    setPromise(searchDishes({}))
-  }else{
-  }
   function clickACB(){
     setPromise(searchDishes({query: query, type: type}));
     //props.model.doSearch({query: props.model.searchParams.query, type: props.model.searchParams.type});
@@ -53,6 +40,7 @@ function Search(props){
     setType(input);
   }
   function chooseDishACB(dish){
+    //console.log("hello");
     props.model.setCurrentDish(dish.id);
   }
   return (

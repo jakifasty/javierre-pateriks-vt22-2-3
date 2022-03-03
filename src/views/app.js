@@ -10,9 +10,9 @@ const Summary=require("../"+PREFIX+"/summaryPresenter.js").default;
 const Search=require("../"+PREFIX+"/searchPresenter.js").default;
 const Details=require("../"+PREFIX+"/detailsPresenter.js").default;
 const Show=require("../"+"reactjs"+"/show.js").default;
+window.location.hash = "search"
 export default
 function App(props){
-    window.location.hash = "search"
     return (<div class="flex-container">
                 {/* TODO TW1.2 Sidebar will be added here, inside a DIV, like Summary below */}
                 <div  class="flex-item-left">

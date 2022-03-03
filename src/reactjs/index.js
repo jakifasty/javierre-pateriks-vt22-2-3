@@ -24,6 +24,7 @@ import DinnerModel from "../DinnerModel.js";
 import promiseNoData from "../views/promiseNoData.js"
 // render a ReactRoot that resolves firebaseModelPromise, then displays the App (see tw/tw3.5-react.js)
 let firebaseModel;
+const bigPromise= firebaseModelPromise();
 
 try{
     firebaseModel=require("/src/"+X+"firebaseModel.js");
@@ -41,9 +42,7 @@ if(firebaseModel && firebaseModel.updateFirebaseFromModel){
         const [model, setModel]= React.useState(new DinnerModel());
 
         React.useEffect(function onStartACB(){
-            updateFirebaseFromModel(model);
-            if(updateModelFromFirebase)  // maybe it was not defined yet
-                updateModelFromFirebase(model);
+            bigPromise.then(function initModelACB(data){setModel(data)}).catch(function errACB(data){console.log(data)})
         }, []);
         return  <App model={model}/>;
     }
