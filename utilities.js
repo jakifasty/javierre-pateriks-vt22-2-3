@@ -150,6 +150,16 @@ function menuPrice(dishesArray){
     //        This will produce the total price, which you return
     return sum;
 }
+
+function isDishInMenu(dishes, dish_id){
+    function hasSameIdCB(dish){
+        return dish.id === dish_id;
+        // TODO return true if the id property of dish isDishEqualCB _different_ from the dishToRemove's id property
+        // This will keep the dish when we filter below.
+        // That is, we will not keep the dish that has the same id as dishToRemove (if any)
+    }
+    return 0<dishes.filter(hasSameIdCB).length
+}
 /*
   At this point, all of TW1.1 tests should pass!
 */
@@ -173,4 +183,4 @@ function menuPrice(dishesArray){
   because the new function object is re-created and interpreted every time the enclosing function runs.
 */
 
-export {isKnownTypeCB, dishType, sortDishes, sortIngredients, shoppingList, menuPrice};
+export {isKnownTypeCB, dishType, sortDishes, sortIngredients, shoppingList, menuPrice, knownTypes};
