@@ -8,9 +8,9 @@ function SearchResultsView(props){
 	}
 
 	function viewResultImages2JSX_CB(dish){
-		return (<span class="searchResults"> 
-					<img src={"https://spoonacular.com/recipeImages/" + dish.image} height="100"  onClickCapture={props.onChangeDish}></img>
-					<div>
+		return (<span onClickCapture={function chooseDishACB(event){props.onChangeDish(dish)}} class="searchResults"> 
+					<img src={"https://spoonacular.com/recipeImages/" + dish.image} height="100"  ></img>
+					<div class="left">
 						{dish.title}
 					</div>
 				</span>

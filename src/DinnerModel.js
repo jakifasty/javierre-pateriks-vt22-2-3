@@ -1,10 +1,11 @@
 import resolvePromise from "./resolvePromise.js";
 import {searchDishes, getDishDetails} from "./dishSource.js";
-//import {isDishInMenu} from "./utilities.js"
+import {isDishInMenu} from "./utilities.js"
     
 function isValid(id){
   return (typeof(id) == "number")
 }
+
 class DinnerModel{
     constructor(observerArray=[], nrGuests=2, dishArray=[], currentDish){
         this.observers = observerArray; //empty array
@@ -14,12 +15,12 @@ class DinnerModel{
 
         this.currentDishPromiseState = {};
         this.searchResultsPromiseState = {} ; //(property). DinnerModel constructor, set model properties to empty objects
-        this.searchParams = {qr: "", ty: ""}; //(property). DinnerModel constructor, set model properties to empty objects
-
+        this.searchParams = {}; //(property). DinnerModel constructor, set model properties to empty objects
+        this.searchResultsPromiseState = {};
+        this.currentDishPromiseState = {};
+        this.searchParams = {};
     }
     setNumberOfGuests(nr){
-        //console.log(nr)
-
         if(Number.isInteger(nr) & nr>0){
             if (!(this.numberOfGuests === nr)){
                 this.numberOfGuests = nr;
@@ -29,8 +30,6 @@ class DinnerModel{
             throw new Error ('number of guests not a positive integer');
         }
 
-        //console.log("after isInteger")
-        //console.log(numberOfGuests);
         // TODO throw an error if the argument is smaller than 1 or not an integer
         // the error message must be exactly "number of guests not a positive integer"
         // to check for integer: test at the console Number.isInteger(3.14)
@@ -44,7 +43,7 @@ class DinnerModel{
     addToMenu(addDish){
         // array spread syntax example. Make sure you understand the code below.
         // It sets this.dishes to a new array [   ] where we spread (...) the previous value
-        //console.log(isDishInMenu)
+        console.log(isDishInMenu)
         if(!isDishInMenu(this.dishes, addDish.id)){
             this.dishes = [...this.dishes, addDish];
             this.notifyObservers({dishToAdd: addDish});
@@ -61,13 +60,10 @@ class DinnerModel{
         }
 
         if(isDishInMenu(this.dishes, dishToRemove.id)){
-            this.dishes = this.dishes.filter(hasSameIdCB/*TODO pass the callback!*/);
+            this.dishes = this.dishes.filter(hasSameIdCB);
             // the test "can remove dishes" should pass
             this.notifyObservers({toRemoveDish: dishToRemove});
         }
-
-
-
 
     }
 
@@ -105,27 +101,13 @@ class DinnerModel{
         this.notifyObservers({setCurrentDish: id});
     }
 
-    removeDish(id){
-        // callback exercise! Also return keyword exercise
-        function hasSameIdCB(dish){
-            return id !== dish.id;
-            // TODO return true if the id property of dish is _different_ from the dishToRemove's id property
-            // This will keep the dish when we filter below.
-            // That is, we will not keep the dish that has the same id as dishToRemove (if any)
-        }
-        this.dishes = this.dishes.filter(hasSameIdCB);
-        //the test "can remove dishes" should pass
-    }
-
     setSearchQuery(q){
         this.searchParams.query = q;
-        this.notifyObservers();
 
     }
 
     setSearchType(t){
         this.searchParams.type = t;
-        this.notifyObservers();
     }
 
     doSearch(params){
@@ -173,8 +155,7 @@ class DinnerModel{
     //this method will be called 
     notifyObservers(payload){
         try{
-            //this.observers.forEach(function invokeObserverCB(obs){obs(payload);}) //payload is used for the persistance
-            obs(payload)
+            this.observers.forEach(function invokeObserverCB(obs){obs(payload);}) //payload is used for the persistance
         }
         catch(err){
             console.error(err);
@@ -184,7 +165,3 @@ class DinnerModel{
 }
 
 export default DinnerModel;
-
-
-
-

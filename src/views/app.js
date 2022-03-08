@@ -3,13 +3,22 @@
    Therefore it needs to import from alternative paths, depending on the framework.
    To achieve that, we use require() with a prefix, instead of import.
 */
-const PREFIX=window.location.toString().includes("react")?"reactjs":"vuejs";
+const PREFIX=window.location.toString().includes("reactjs")?"reactjs":"vuejs";
 
-const Summary=require("../"+PREFIX+"/summaryPresenter.js").default;
+/*const Summary=require("../"+PREFIX+"/summaryPresenter.js").default;
 const Sidebar=require("../"+PREFIX+"/sidebarPresenter.js").default;
 const Search=require("../"+PREFIX+"/searchPresenter.js").default;
 const Details=require("../"+PREFIX+"/detailsPresenter.js").default;
-//Show=require("../"+"reactjs"+"/show.js").default;
+//const Show=require("../"+"reactjs"+"/show.js").default;
+window.location.hash = "search"*/
+
+import Summary from "../vuejs/summaryPresenter.js";
+import Sidebar from "../vuejs/sidebarPresenter.js";
+import Search from "../reactjs/searchPresenter.js";
+import Details from "../vuejs/detailsPresenter.js";
+//import Show from "../reactjs/show.js"
+//const Show=require("../"+"reactjs"+"/show.js").default;
+//window.location.hash = "search"
 
 export default
 function App(props){

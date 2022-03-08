@@ -3,15 +3,6 @@ import { assert, expect, should } from 'chai';
 import createUI from "./createUI.js";
 import installOwnCreateElement from "./jsxCreateElement.js";
 
-const DinnerModel= require('../src/'+TEST_PREFIX+'DinnerModel.js').default;
-
-const Summary= require('../src/vuejs/'+TEST_PREFIX+'summaryPresenter.js').default;
-const SummaryView= require('../src/views/'+TEST_PREFIX+'summaryView.js').default;
-
-const App= require('../src/views/'+TEST_PREFIX+'app.js').default;
-
-const VueRoot=require("/src/vuejs/"+TEST_PREFIX+"VueRoot.js").default;
-
 const {render, h}= require("vue");
 
 let SidebarView;
@@ -20,44 +11,58 @@ const X= TEST_PREFIX;
 try{
     SidebarView= require('../src/views/'+X+'sidebarView.js').default;
     Sidebar= require('../src/vuejs/'+X+'sidebarPresenter.js').default;
-}catch(e){};
+}catch(e){console.log(e);};
 
 function traverseJSX({tag, props, children}){
     if(!children)
         return [{tag, props}];
     return [{tag, props}, ... children.map(child=> traverseJSX(child))].flat();
 }
-describe("TW1.4 Model-View-Presenter", function() {
+describe("TW1.4 Model-View-Presenter", function tw_1_4_10() {
     this.timeout(200000);  // increase to allow debugging during the test run
     
-    before(function(){
+    before(function tw_1_4_10_before(){
         if(!SidebarView || !Sidebar) this.skip();
     });
     
-    it("Vue Summary presenter renders SummaryView with people prop", function(){
+    it("Vue Summary presenter renders SummaryView with people prop", function tw_1_4_10_1(){
+        const Summary= require('../src/vuejs/'+TEST_PREFIX+'summaryPresenter.js').default;
+        const SummaryView= require('../src/views/'+TEST_PREFIX+'summaryView.js').default;
+
         installOwnCreateElement();
-        const rendering=Summary({model: {numberOfGuests:2, dishes:[]}});
+        let rendering=Summary({model: {numberOfGuests:2, dishes:[]}});
 
         expect(rendering.tag).to.be.ok;
         expect(rendering.tag.name).to.equal(SummaryView.name);
         expect(rendering.props).to.be.ok;
         expect(rendering.props.people).to.equal(2);
+
+        rendering=Summary({model: {numberOfGuests:3, dishes:[]}});
+        expect(rendering.tag).to.be.ok;
+        expect(rendering.tag.name).to.equal(SummaryView.name);
+        expect(rendering.props).to.be.ok;
+        expect(rendering.props.people).to.equal(3);
     });
 
-    it("Vue Sidebar presenter renders SidebarView with number prop", function(){
+    it("Vue Sidebar presenter renders SidebarView with number prop", function tw_1_4_10_2(){
         installOwnCreateElement();
-        expect(Sidebar).to.be.ok;
-        const rendering=Sidebar({model:  {numberOfGuests:2, dishes:[]}});
+        let rendering=Sidebar({model:  {numberOfGuests:2, dishes:[]}});
 
         expect(rendering.tag).to.be.ok;
         expect(rendering.tag.name).to.equal(SidebarView.name);
         expect(rendering.props).to.be.ok;
         expect(rendering.props.number).to.equal(2);
+
+        rendering=Sidebar({model:  {numberOfGuests:5, dishes:[]}});
+
+        expect(rendering.tag).to.be.ok;
+        expect(rendering.tag.name).to.equal(SidebarView.name);
+        expect(rendering.props).to.be.ok;
+        expect(rendering.props.number).to.equal(5);
     });
 
-    it("Vue Sidebar presenter renders SidebarView with correct custom event handler", function(){
+    it("Vue Sidebar presenter renders SidebarView with correct custom event handler", function tw_1_4_10_3(){
         installOwnCreateElement();
-        expect(Sidebar);
         let latestGuests;
         const rendering=Sidebar({
             model:{
@@ -76,8 +81,11 @@ describe("TW1.4 Model-View-Presenter", function() {
         
     });
 
-    it("App renders Sidebar, then Summary", function(){
+    /*
+    it("App renders Sidebar, then Summary", function tw_1_4_10_4(){
+        const Summary= require('../src/vuejs/'+TEST_PREFIX+'summaryPresenter.js').default;
         installOwnCreateElement();
+        const App= require('../src/views/'+TEST_PREFIX+'app.js').default;
         const rendering= App({model: {
             numberOfGuests:2,
             dishes:[],
@@ -90,41 +98,6 @@ describe("TW1.4 Model-View-Presenter", function() {
         expect(components.length).to.be.gte(2);
         
         expect(components[0].tag.name).to.equal(Sidebar.name);
-        expect(components.find(function checkSummaryCB(x){ return x.tag.name===Summary.name;}), "Summary must be rendered after Sidebar");
-    });
-
-    it("Integration test: pressing UI buttons changes number in Model", async function(){
-        let div= createUI();
-        window.React={createElement:h};
-
-        const oldFetch=fetch;
-        window.fetch= function(){
-            return Promise.resolve({
-                ok:true,
-                status:200,
-                json(){
-                    return Promise.resolve({results:[]});
-                }
-            });
-        };
-
-        try{
-            render(<VueRoot />,div);
-        }finally{ window.fetch=oldFetch; }
-        
-        let myModel= require("/src/vuejs/"+TEST_PREFIX+"VueRoot.js").proxyModel;
-
-        expect(div.querySelector('span[title]').firstChild.textContent).to.equal("2");
-        div.querySelectorAll("button")[0].click();
-        expect(myModel.numberOfGuests).to.equal(1);
-
-        await new Promise(resolve => setTimeout(resolve));  // need to wait a bit for UI to update...   
-        expect(div.querySelector('span[title]').firstChild.textContent).to.equal("1");
-
-        div.querySelectorAll("button")[1].click();
-        expect(myModel.numberOfGuests).to.equal(2);
-        await new Promise(resolve => setTimeout(resolve));
-        expect(div.querySelector('span[title]').firstChild.textContent).to.equal("2");
-    });
-    
+        expect(components.find(function tw_1_4_10_4_checkSummaryCB(x){ return x.tag.name===Summary.name;}), "Summary must be rendered after Sidebar");
+    });*/
 });
