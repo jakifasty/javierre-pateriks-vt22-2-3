@@ -1,23 +1,29 @@
 import { menuPrice, dishType, sortDishes} from "../utilities.js"
+
 function sidebarView(props){
     return (
             <div>
-                <button type="button" onclick={function clickACB(event){props.onNumberChange(props.number-1)}} disabled={props.number<=1? true : false}>-</button>
-                <span title="nr guests">{props.number}</span>
-                <button type="button" onclick={function clickACB(event){props.onNumberChange(props.number+1)}}>+</button>
-                {renderDishes(props.setCurrentDish, props.onRemove, props.dishes, props.number)}
+                <td>
+                Number of guests
+                </td>
+                <td>
+                    <button type="button" onClick={function clickACB(event){props.onNumberChange(props.number-1)}} disabled={props.number<=1? true : false}>-</button>
+                    <span title="nr guests">{props.number}</span>
+                    <button type="button" onClick={function clickACB(event){props.onNumberChange(props.number+1)}}>+</button>
+                </td>
+                {renderDishes(props.onCurrentDish, props.onRemove, props.dishes, props.number)}
             </div>
     );
 }
 
-function renderDishes(setDish, onRemove, dishes, number){
+function renderDishes(onCurrentDish, onRemove, dishes, number){
     function dishesTableRowCB(dish){
-        return     <tr key={ /* TODO what's a key? */dish.id}>
+        return     <tr key={dish.id}>
                     <td>
-                      <button onClickCapture= {function clickACB(e){onRemove(dish);}}>x</button>
+                      <button onClick= {function setClickACB(e){onRemove(dish);}}>x</button>
                     </td>
-                    <td onClickCapture={function clickACB(e){setDish(dish);}}>
-                      <a href="#">{dish.title}</a>
+                    <td>
+                      <a onClick={function setClickACB(e){onCurrentDish(dish);}} href="#">{dish.title}</a>
                     </td>
                     <td>
                       {dishType(dish)}
@@ -28,14 +34,13 @@ function renderDishes(setDish, onRemove, dishes, number){
                   </tr>
     }
 
-
     return <table>
         <thead>
         </thead>
         <tbody>
 
           {  //  <---- we are in JSX, with this curly brace, we go back to JavaScript
-             sortDishes(dishes).map(dishesTableRowCB/*TODO send callback here */)
+             sortDishes(dishes).map(dishesTableRowCB)
              // TODO sort the ingredients. Import the needed function from utilities.js
           }
 
@@ -43,7 +48,7 @@ function renderDishes(setDish, onRemove, dishes, number){
                       <td>
                       </td>
                       <td>
-                        Total
+                        Total:
                       </td>
                       <td>
                       </td>

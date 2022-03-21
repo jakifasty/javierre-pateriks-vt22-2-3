@@ -2,8 +2,8 @@
 import SearchFormView from "../views/searchFormView.js"
 import SearchResultsView from "../views/searchResultsView.js"
 import promiseNoData from "../views/promiseNoData.js"
-import { shoppingList, knownTypes } from "../utilities.js"
-import {searchDishes} from "../dishSource.js"
+import {shoppingList, knownTypes} from "../utilities.js"
+import {searchDishes, getDishDetails} from "../dishSource.js"
 
 
 export default
@@ -30,6 +30,6 @@ function SearchFormViewRender(props){
     return  <div>
                 <SearchFormView dishTypeOptions={knownTypes} onSearch={clickButtonACB} inputOnChange={inputOnChangeACB} typeOnChange={setTypeOnSearchACB} />
                 {promiseNoData(props.model.searchResultsPromiseState) || 
-                <SearchResultsView searchResults = {props.model.searchResultsPromiseState.data} onChangeDish={changeDishOnClickACB}/>}
+                <SearchResultsView searchResults = {props.model.searchResultsPromiseState.data} chooseDish={changeDishOnClickACB}/>}
             </div>
 }

@@ -16,26 +16,20 @@ function DetailsView(props) {
 	function listIngredientsCB(item){
 		return <p>{item.name}: {item.amount} {item.unit}</p>;
 	}
-
-	/*function addToMenuACB(dishToAdd) {
-		return addToMenu(dishToAdd)
-	}*/
-
+	//? true : false
 	return( 
 		<div>
 	    	<div class="detailsRow">
 	    		<div class="detailsColumn">
 		    		<span><h1>{props.dishData.title}</h1></span>
 			    		<div>
-			                <button type="button" onClick={clickAddToMenuCB} disabled={props.isDishInMenu? true : false}>Add to menu</button>
+			                <button type="button" onClick={clickAddToMenuCB} disabled={props.isDishInMenu}>Add to menu</button>
 			    		</div>
 		    			<tr>
 			    			<th><img src={props.dishData.image} height="100"></img></th>
-	
 			    			<table class="border">
 				    			<tr>
 						    		<th>Price: {props.dishData.pricePerServing}</th>
-
 					    			<th>for {props.guests} guests: {((props.dishData.pricePerServing)*(props.guests)).toFixed(2)}</th>
 				    			</tr>
 			    			</table>

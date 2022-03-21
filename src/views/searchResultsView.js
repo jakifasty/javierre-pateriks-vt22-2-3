@@ -1,20 +1,24 @@
 //searchResultsView.js file
 //Component SearchFormView
+window.location.hash="details"
 
 function SearchResultsView(props){
 
-	function clickBubblesACB(event){
-		console.log(event.target.value);
+	function chooseDishACB(event){
+		console.log("DEBUG HERE")
+		console.log(props.dish)
+		props.chooseDish(props.dish);
+		windows.location.hash="details";
 	}
 
 	function viewResultImages2JSX_CB(dish){
-		return (<span onClickCapture={function chooseDishACB(event){props.onChangeDish(dish)}} class="searchResults"> 
-					<img src={"https://spoonacular.com/recipeImages/" + dish.image} height="100"  ></img>
+		return (<span key={dish.id} onClick={function(event){props.chooseDish(dish);}} className="searchResults"> 
+					<img src={"https://spoonacular.com/recipeImages/" + dish.image} height="100"></img>
 					<div class="left">
 						{dish.title}
 					</div>
 				</span>
-				);
+		);
 	}
 
 	return(

@@ -85,7 +85,6 @@ class DinnerModel{
             //this.currentDishPromiseState = resolvePromise(getDishDetails(id), this.searchResultsPromiseState);
         }*/
 
-        console.log(id)
         let myModel = this;
         
         function notifyACB(){
@@ -103,11 +102,12 @@ class DinnerModel{
 
     setSearchQuery(q){
         this.searchParams.query = q;
-
+        this.notifyObservers();
     }
 
     setSearchType(t){
         this.searchParams.type = t;
+        this.notifyObservers();
     }
 
     doSearch(params){

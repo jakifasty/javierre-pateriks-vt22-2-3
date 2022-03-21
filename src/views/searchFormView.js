@@ -6,22 +6,10 @@ import {treatHTTPResponseACB, transformResultACB, getDishDetails, searchDishes} 
 function SearchFormView(props) {
 
 	function dishOptions2JSX_CB(option, index){ 
-		return <option key={index+1} value={option}>{option}</option>;
+		return <option key={index} value={option}>{option}</option>;
 	}
 
-	/*<div class="debug">
-				<input type="text" onChange={function setTypeOnChnage(event){props.inputOnChange(event.target.value)}} placeholder={"Input what you want..."}></input>
-				<select onChange={function setTypeOnChange(event){props.typeOnChange(event.target.value)}}>
-					<option>
-						Choose:
-					</option>
-						{props.dishTypeOptions.map(dishOptions2JSX_CB)}
-				</select> 
-				<button onClick = {props.onSearch}>Search!</button>
-			</div>
-			*/
-
-	return ( <div>
+			/*<div>
 				<div>
 					<table>
 					<tbody>
@@ -38,16 +26,27 @@ function SearchFormView(props) {
 						</select>
 					</td>
 					<td>
-						<button onClick={function(event){props.onSearch}}>Search!</button>
+						<button onClick={function (event){props.onSearch}}>Search!</button>
 					</td>
-					<td width="200px"></td>
 					<td>
-						<button onClick={function(event){window.location.hash="summary"}}>Summary</button>
+						<button onClick={function (event){window.location.hash="summary"}}>Summary</button>
 					</td>
 					</tr>
 					</tbody>
 					</table>
 				</div>
+			</div>
+			*/
+
+	return ( <div class="debug">
+				<input type="text" onChange={function setTypeOnChange(event){props.inputOnChange(event.target.value)}} placeholder={"Input what you want..."}></input>
+				<select onChange={function setTypeOnChange(event){props.typeOnChange(event.target.value)}}>
+					<option>
+						Choose:
+					</option>
+						{props.dishTypeOptions.map(dishOptions2JSX_CB)}
+				</select> 
+				<button onClick = {function setOnSearch(){props.onSearch()}}>Search!</button>
 			</div>
 	);
 }

@@ -55,7 +55,7 @@ class DinnerModel{
            // This will keep the dish when we filter below.
            // That is, we will not keep the dish that has the same id as dishToRemove (if any)
        }
-       this.dishes= this.dishes.filter(hasSameIdCB/*TODO pass the callback!*/);
+       this.dishes= this.dishes.filter(hasSameIdCB);
        // the test "can remove dishes" should pass
      }
 

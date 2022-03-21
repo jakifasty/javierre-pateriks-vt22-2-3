@@ -1,7 +1,7 @@
 //detailsPresenter.js file
 import DinnerModel from "C:/Users/borja/javierre-pateriks-vt22-2_3/src/DinnerModel.js"
 import DetailsView from "../views/detailsView.js";
-import promiseNoData from "C:/Users/borja/javierre-pateriks-vt22-2_3/src/views/promiseNoData.js"
+import promiseNoData from "../views/promiseNoData.js"
 
 export default
 function Details(props){
