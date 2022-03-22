@@ -2,7 +2,7 @@ import { sortIngredients, sortDishes } from "../utilities.js"
 /* Functional JSX component. Name starts with capital letter */
 function SummaryView(props){
     return (
-            <div class="debug">
+            <div className="debug">
                 Summary for <span title="nr guests">{props.people}</span> persons:
 
                 {  //  <---- we are in JSX; with this curly brace, we go back to JavaScript, and can write JS code and comments.
@@ -11,6 +11,7 @@ function SummaryView(props){
                    /* TODO uncomment this at TW1.5, it won't work before because props.ingredinets is not set.
                        renderIngredients(props.ingredients, props.people) */
                 }
+                <button onClick={function(event) {window.location.hash="#search"}}>Back to search</button>
             </div>
     );
 }
@@ -19,8 +20,10 @@ function SummaryView(props){
 /* This is an ordinary JS function, not a component. It will be invoked from the component above */
 function renderIngredients(ingredientArray, people){
     function ingredientTableRowCB(ingr){
-      return <tr key={ /* TODO what's a key? */ingr.id}><td>{ingr.name}</td> <td>{ingr.aisle}</td><td class="right">{(ingr.amount*people).toFixed(2)/* multiply by number of people! Display with 2 decimals, use a CSS classs to align right */
-      }</td><td> {ingr.unit} </td></tr>;
+      window.location.hash="summary";
+      return <tr key={ingr.id}><td>{ingr.name}</td> <td>{ingr.aisle}</td>
+             <td className="right">{(ingr.amount*people).toFixed(2)/* multiply by number of people! Display with 2 decimals, use a CSS classs to align right */}</td>
+             <td> {ingr.unit} </td></tr>;
     }
 
 

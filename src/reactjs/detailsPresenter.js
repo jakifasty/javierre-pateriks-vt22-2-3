@@ -17,7 +17,7 @@ function Details(props){
 		setNumberOfGuests(props.model.numberOfGuests);
 		setDishes(props.model.dishes);
 		setData(props.model.currentDishPromiseState.data);
-		setPromise(props.model.currentDishPromiseState);
+		setPromise(props.model.currentDishPromiseState.promise);
 		setError(props.model.currentDishPromiseState.error);
 	}
 
@@ -39,10 +39,6 @@ function Details(props){
 		props.model.addToMenu(props.model.currentDishPromiseState.data);
 	}
 
-	function cancelACB(){
-		window.location.hash = "search"
-	};
-
 	return promiseNoData(props.model.currentDishPromiseState) || <DetailsView dishData={props.model.currentDishPromiseState.data} //dishData, isDIshInMenu and guests are props
-		   isDishInMenu={props.model.dishes.filter(sameidCB).length>0} guests={props.model.numberOfGuests} onAddToMenu={addToMenuACB} cancel={cancelACB}/> //addToMenu is a custom event
+		   isDishInMenu={props.model.dishes.filter(sameidCB).length>0} guests={props.model.numberOfGuests} onAddToMenu={addToMenuACB} /> //addToMenu is a custom event
 }

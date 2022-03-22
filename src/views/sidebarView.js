@@ -18,17 +18,18 @@ function sidebarView(props){
 
 function renderDishes(onCurrentDish, onRemove, dishes, number){
     function dishesTableRowCB(dish){
+        //window.location.hash="sidebar";
         return     <tr key={dish.id}>
                     <td>
                       <button onClick= {function setClickACB(e){onRemove(dish);}}>x</button>
                     </td>
                     <td>
-                      <a onClick={function setClickACB(e){onCurrentDish(dish);}} href="#">{dish.title}</a>
+                      <a onClick={function setClickACB(e){onCurrentDish(dish);}} href="#details">{dish.title}</a>
                     </td>
                     <td>
                       {dishType(dish)}
                     </td>
-                    <td class="right">
+                    <td className="right">
                       {(dish.pricePerServing*number).toFixed(2)}
                     </td>
                   </tr>
@@ -52,7 +53,7 @@ function renderDishes(onCurrentDish, onRemove, dishes, number){
                       </td>
                       <td>
                       </td>
-                      <td class="right">
+                      <td className="right">
                         {(menuPrice(dishes)*number).toFixed(2)}
                       </td>
                     </tr>

@@ -16,6 +16,7 @@ function Summary(props){
 	function observerWasCreatedACB(){
 		observerACB();
 		props.model.addObserver(observerACB);
+		
 		return function isPutDownACB(){
 			props.model.removeObserver(observerACB);
 		}

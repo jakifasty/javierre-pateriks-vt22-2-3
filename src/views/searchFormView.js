@@ -5,7 +5,8 @@ import {treatHTTPResponseACB, transformResultACB, getDishDetails, searchDishes} 
 
 function SearchFormView(props) {
 
-	function dishOptions2JSX_CB(option, index){ 
+	function dishOptions2JSX_CB(option, index){
+		window.location.hash="search";
 		return <option key={index} value={option}>{option}</option>;
 	}
 
@@ -47,6 +48,7 @@ function SearchFormView(props) {
 						{props.dishTypeOptions.map(dishOptions2JSX_CB)}
 				</select> 
 				<button onClick = {function setOnSearch(){props.onSearch()}}>Search!</button>
+                <button onClick = {function(event){window.location.hash="summary"}}>Summary</button>
 			</div>
 	);
 }

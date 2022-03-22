@@ -15,6 +15,11 @@ function Details(props){
 
 	function addToMenuACB(){
 		props.model.addToMenu(props.model.currentDishPromiseState.data);
+		window.location.hash="search" //correct ??
+	}
+
+	function toCancelACB() {
+		window.location.hash = "search"
 	}
 
 	return (promiseNoData(props.model.currentDishPromiseState) || <DetailsView dishData={props.model.currentDishPromiseState.data} //dishData, isDIshInMenu and guests are props

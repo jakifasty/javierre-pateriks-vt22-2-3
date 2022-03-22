@@ -22,11 +22,11 @@ window.location.hash = "search"
 
 export default
 function App(props){
-    return (<div class="flexParent">
-                <span class="detailsRow">
+    return (<div className="flexParent">
+                <span className="detailsRow">
                     <Show hash="#sidebar">{<Sidebar model={props.model}/>}</Show>
                 </span>
-                <span class="mainContent">
+                <span className="mainContent">
                     <Show hash="#summary">{<Summary model={props.model}/>}</Show>
                     <Show hash="#search">{<Search model={props.model}/>}</Show>
                     <Show hash="#details">{<Details model={props.model}/>}</Show>

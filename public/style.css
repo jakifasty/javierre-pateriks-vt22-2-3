@@ -15,7 +15,6 @@
     .flexParent{
         display:        flex;
         text-align:  sidebar;
-        display:        flex; 
 }
 
 .sidebar{
@@ -53,8 +52,6 @@
     content: "";
     display: table;
     clear: both;
-
-    //display: flex;
 }
 
 .border {
@@ -85,6 +82,10 @@
     background-color: #f1f1f1;
     padding: 10px;
     flex: 70%;
+}
+
+.hidden{
+    display: none;
 }
 
 
