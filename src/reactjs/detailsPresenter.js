@@ -7,11 +7,11 @@ import {isDishInMenu} from "../utilities.js"
 export default
 function Details(props){
 
-	const [, setNumberOfGuests] = React.useState(null);
-	const [, setDishes] = React.useState(null);
-	const [, setData] = React.useState(null);
-	const [, setPromise] = React.useState(null);
-	const [, setError] = React.useState("");
+	const [, setNumberOfGuests] = React.useState();
+	const [, setDishes] = React.useState();
+	const [, setData] = React.useState();
+	const [, setPromise] = React.useState();
+	const [, setError] = React.useState();
 
 	function observerACB() {
 		setNumberOfGuests(props.model.numberOfGuests);
@@ -32,10 +32,7 @@ function Details(props){
     React.useEffect(observerItWasCreatedACB, []); //allows functional components to have lifecycle methods in one single API
 
 	function sameidCB(dishToCompare){
-		if(props.model.currentDish === dishToCompare.id) 
-			return true;
-		else
-			return false;
+		return props.model.currentDish === dishToCompare.id;
 	}
 
 	function addToMenuACB(){
@@ -47,5 +44,5 @@ function Details(props){
 	};
 
 	return promiseNoData(props.model.currentDishPromiseState) || <DetailsView dishData={props.model.currentDishPromiseState.data} //dishData, isDIshInMenu and guests are props
-		   isDishInMenu={isDishInMenu(props.model.dishes, props.model.currentDish)} guests={props.model.numberOfGuests} onAddToMenu={addToMenuACB} cancel={cancelACB}/> //addToMenu is a custom event
+		   isDishInMenu={props.model.dishes.filter(sameidCB).length>0} guests={props.model.numberOfGuests} onAddToMenu={addToMenuACB} cancel={cancelACB}/> //addToMenu is a custom event
 }

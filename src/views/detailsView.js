@@ -1,7 +1,4 @@
 //detailsView.js file
-import {menuPrice, dishType, sortDishes} from "../utilities.js"
-import {treatHTTPResponseACB, transformResultACB, getDishDetails, searchDishes} from "../dishSource.js"
-
 
 function DetailsView(props) {
 

@@ -26,7 +26,7 @@ function SearchFormView(props) {
 						</select>
 					</td>
 					<td>
-						<button onClick={function (event){props.onSearch}}>Search!</button>
+						<button onClick={function (event){props. }}>Search!</button>
 					</td>
 					<td>
 						<button onClick={function (event){window.location.hash="summary"}}>Summary</button>
