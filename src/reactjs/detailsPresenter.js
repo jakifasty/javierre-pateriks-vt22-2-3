@@ -40,5 +40,5 @@ function Details(props){
 	}
 
 	return promiseNoData(props.model.currentDishPromiseState) || <DetailsView dishData={props.model.currentDishPromiseState.data} //dishData, isDIshInMenu and guests are props
-		   isDishInMenu={props.model.dishes.filter(sameidCB).length>0} guests={props.model.numberOfGuests} onAddToMenu={addToMenuACB} /> //addToMenu is a custom event
+		   isDishInMenu={isDishInMenu(props.model.dishes, props.model.currentDish)} guests={props.model.numberOfGuests} onAddToMenu={addToMenuACB} /> //addToMenu is a custom event
 }

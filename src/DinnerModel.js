@@ -7,18 +7,14 @@ function isValid(id){
 }
 
 class DinnerModel{
-    constructor(observerArray=[], nrGuests=2, dishArray=[], currentDish){
-        this.observers = observerArray; //empty array
+    constructor(nrGuests=2, dishArray=[], currentDish){
+        this.observers = []; //empty array
         this.setNumberOfGuests(nrGuests);
         this.dishes= dishArray;
-        //this.currentDish = {}; //ADDED TESTING
 
         this.currentDishPromiseState = {};
         this.searchResultsPromiseState = {} ; //(property). DinnerModel constructor, set model properties to empty objects
-        this.searchParams = {}; //(property). DinnerModel constructor, set model properties to empty objects
-        this.searchResultsPromiseState = {};
-        this.currentDishPromiseState = {};
-        this.searchParams = {};
+        this.searchParams = {}; //{query: "", type: ""}
     }
     setNumberOfGuests(nr){
         if(Number.isInteger(nr) & nr>0){
@@ -43,10 +39,22 @@ class DinnerModel{
     addToMenu(addDish){
         // array spread syntax example. Make sure you understand the code below.
         // It sets this.dishes to a new array [   ] where we spread (...) the previous value
-        console.log(isDishInMenu)
-        if(!isDishInMenu(this.dishes, addDish.id)){
+        /*if(!isDishInMenu(this.dishes, addDish.id)){
             this.dishes = [...this.dishes, addDish];
-            this.notifyObservers({dishToAdd: addDish});
+            this.notifyObservers({addDish: addDish});
+        }*/
+
+        function hasSameIdCB(dish){
+          return addDish.id === dish.id;
+            // TODO return true if the id property of dish is _different_ from the dishToRemove's id property
+            // This will keep the dish when we filter below.
+            // That is, we will not keep the dish that has the same id as dishToRemove (if any)
+        }
+        let hasDish = [];
+        hasDish = this.dishes.filter(hasSameIdCB);
+        if(hasDish.length == 0){
+          this.dishes= [...this.dishes, addDish];
+          this.notifyObservers({addToMenu: addDish});
         }
     }
 
@@ -58,11 +66,20 @@ class DinnerModel{
             // This will keep the dish when we filter below.
             // That is, we will not keep the dish that has the same id as dishToRemove (if any)
         }
+        let toRemove = []
+        toRemove = this.dishes.filter(hasSameIdCB);
+
+        /*if(toRemove.length == 0){
+            
+        }else{
+            this.dishes= this.dishes.filter(hasSameIdCB);
+            this.notifyObservers({removeDish: dishToRemove});
+        }*/
 
         if(isDishInMenu(this.dishes, dishToRemove.id)){
             this.dishes = this.dishes.filter(hasSameIdCB);
             // the test "can remove dishes" should pass
-            this.notifyObservers({toRemoveDish: dishToRemove});
+            this.notifyObservers({removeDish: dishToRemove});
         }
 
     }
@@ -74,16 +91,6 @@ class DinnerModel{
        So we store also abstract data that will influence the application status.
     */
     setCurrentDish(id){
-        /*if((typeof(id) === "number") && (id !== null)  && (id !== this.currentDish)){
-            
-            resolvePromise(getDishDetails(id), this.currentDishPromiseState);
-        }
-        else*/
-
-        /*if((typeof(id) === "defined") && (id !== currentDish.id)){
-            this.currentDishPromiseState = resolvePromise(searchDishes(this.searchParams), this.searchResultsPromiseState);
-            //this.currentDishPromiseState = resolvePromise(getDishDetails(id), this.searchResultsPromiseState);
-        }*/
 
         let myModel = this;
         
@@ -111,6 +118,8 @@ class DinnerModel{
     }
 
     doSearch(params){
+        console.log("Here inside doSearch")
+        console.log(params)
         const theModel = this;
         
         function notifyACB(){
@@ -131,8 +140,18 @@ class DinnerModel{
             // This will keep the dish when we filter below.
             // That is, we will not keep the dish that has the same id as dishToRemove (if any)
         }
-        this.dishes= this.dishes.filter(hasSameIdCB/*TODO pass the callback!*/);
+        //this.dishes= this.dishes.filter(hasSameIdCB);
         //the test "can remove dishes" should pass
+
+        let toRemove = []
+        toRemove = this.dishes.filter(hasSameIdCB);
+        if(toRemove.length == 0){
+
+        }else{
+            //notifyObservers({removeDish: id});
+            this.dishes= this.dishes.filter(function notSameIdCB(dish){return id !== dish.id;});
+            this.notifyObservers({removeDish: id});
+        }
     }
 
     //new methods TW3
@@ -142,17 +161,18 @@ class DinnerModel{
 
     removeObserver(callback){ //to remove observer for 
 
-        console.log(callback);
-
-        function hasSameIdCallbackCB(id){
+        /*function hasSameIdCallbackCB(id){
             return callback!==id;
         }
+        this.observers = this.observers.filter(hasSameIdCallbackCB)*/
 
-        this.observers = this.observers.filter(hasSameIdCallbackCB) 
+        function removeCB(id){
+            (id === callback)? false : true;
+        }
+        this.observers = this.observers.filter(removeCB);
     }
 
-
-    //this method will be called 
+    //this method will be called every to that notifies the available observers
     notifyObservers(payload){
         try{
             this.observers.forEach(function invokeObserverCB(obs){obs(payload);}) //payload is used for the persistance

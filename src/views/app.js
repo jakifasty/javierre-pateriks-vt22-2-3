@@ -27,15 +27,10 @@ function App(props){
                     <Show hash="#sidebar">{<Sidebar model={props.model}/>}</Show>
                 </span>
                 <span className="mainContent">
-                    <Show hash="#summary">{<Summary model={props.model}/>}</Show>
                     <Show hash="#search">{<Search model={props.model}/>}</Show>
                     <Show hash="#details">{<Details model={props.model}/>}</Show>
+                    <Show hash="#summary">{<Summary model={props.model}/>}</Show>
                 </span>
             </div>
     );
 }
-
-//<div class="sidebar"><Sidebar model={props.model} /></div>
-//<div class="mainContent"><Summary model={props.model} /></div>
-//<div class="mainContent"><Search model={props.model}/></div>
-//<div class="mainContent"><Details model={props.model}/></div>

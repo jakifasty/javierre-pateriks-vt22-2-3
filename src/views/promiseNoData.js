@@ -1,6 +1,4 @@
 //promiseNoData.js file
-import resolvePromise from "../resolvePromise.js"
-import DinnerModel from "../DinnerModel.js"
 
 function promiseNoData(promiseState){
 
@@ -12,6 +10,9 @@ function promiseNoData(promiseState){
 	//so they should start showing “loading images”
 
 	if((!promiseState.data) && (!promiseState.error)){ //test 2 TW2.4
+		console.log("Here LOG")
+		console.log(promiseState.data)
+		console.log(promiseState.error)
 		return <img src={"https://i.stack.imgur.com/kOnzy.gif"} height="100" class="imageGIF"></img>
 	}
 

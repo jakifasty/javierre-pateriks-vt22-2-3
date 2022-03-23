@@ -67,8 +67,9 @@ function Search(props){ //React state hook, i.e. React Steteful Component
         props.model.setCurrentDish(dish.id);
     }
 
+    //if(!props.model.searchResultsPromiseState.promise){props.model.doSearch({query: "foo", type: "bar"});}
     return (<div>
-                <SearchFormView dishTypeOptions={knownTypes} onSearch={clickButtonACB} inputOnChange={inputOnChangeACB} typeOnChange={setTypeOnSearchACB} />
+                <SearchFormView inputOnChange={inputOnChangeACB} typeOnChange={setTypeOnSearchACB} onSearch={clickButtonACB} dishTypeOptions={knownTypes}/>
                 {promiseNoData({promise: promise, data: data, error: err}) || <SearchResultsView searchResults={data} chooseDish={changeDishOnClickACB}/>}
             </div>
     );

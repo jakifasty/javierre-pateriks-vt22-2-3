@@ -2,12 +2,14 @@
    The Model keeps only abstract data and has no notions of graohics or interaction
 */
 import resolvePromise from "./resolvePromise.js"
-import {getDishDetails, searchDishes} from "./dishSource.js"
+import { getDishDetails, searchDishes } from "./dishSource.js"
 
 class DinnerModel{
     constructor(nrGuests=2, dishArray=[], currentDish){
+        this.observers = [];
+
         this.setNumberOfGuests(nrGuests);
-        this.dishes= dishArray;
+        this.dishes = dishArray;
         this.currentDish = {}; //ADDED TESTING
 
         this.currentDishPromiseState = {};
