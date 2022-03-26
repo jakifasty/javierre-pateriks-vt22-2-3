@@ -5,8 +5,8 @@ import {shoppingList} from "../utilities"
 
 export default
 function Summary(props){
-	const [ , setNumberOfGuests] = React.useState(null); //Custom components render and re-render by executing a function
-	const [ , setDishes] = React.useState(null); //Custom components render and re-render by executing a function
+	const [, setNumberOfGuests] = React.useState(null); //Custom components render and re-render by executing a function
+	const [, setDishes] = React.useState(null); //Custom components render and re-render by executing a function
 
 	function observerACB(){ //call observer for the two props 
 		setNumberOfGuests(props.model.numberOfGuests);

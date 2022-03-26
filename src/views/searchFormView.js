@@ -40,7 +40,7 @@ function SearchFormView(props) {
 			*/
 
 	return ( <div class="debug">
-				<input type="text" onChange={function setTypeOnChange(event){props.inputOnChange(event.target.value)}} placeholder={"Input what you want..."}></input>
+				<input type="text" onChange={function setTypeOnChange(event){props.inputOnChange(event.target.value)}} placeholder={"Set search dish type..."}></input>
 				<select onChange={function setTypeOnChange(event){props.typeOnChange(event.target.value)}}>
 					<option>
 						Choose:

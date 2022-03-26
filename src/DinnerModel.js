@@ -10,7 +10,7 @@ class DinnerModel{
     constructor(nrGuests=2, dishArray=[], currentDish){
         this.observers = []; //empty array
         this.setNumberOfGuests(nrGuests);
-        this.dishes= dishArray;
+        this.dishes = dishArray;
 
         this.currentDishPromiseState = {};
         this.searchResultsPromiseState = {} ; //(property). DinnerModel constructor, set model properties to empty objects

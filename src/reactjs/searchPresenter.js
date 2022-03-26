@@ -11,7 +11,7 @@ export default
 function Search(props){ //React state hook, i.e. React Steteful Component
 
     //declare constants to be used
-    const [promise, setPromise] = React.useState(); //rerendering and initializing of component state as empty Object for clickButtonACB
+    const [promise, setPromise] = React.useState(); //rerendering and initializing undefined component state as empty Object for clickButtonACB
     const [qr, setSearchQuery] = React.useState(""); //rerendering and initializing of component state for clickButtonACB
     const [ty, setSearchType] = React.useState(""); //rerendering and initializing of component state for clickButtonACB
     const [data, setData] = React.useState([]); //rerendering and initializing of component state for clickButtonACB
