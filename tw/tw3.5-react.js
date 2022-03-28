@@ -22,7 +22,7 @@ try{
 if(firebaseModel && firebaseModel.updateFirebaseFromModel){
     const {updateFirebaseFromModel, updateModelFromFirebase}=firebaseModel;
     function ReactRoot(){
-        const [model, setModel] = React.useState(new DinnerModel());
+        const [model, setModel]= React.useState(new DinnerModel());
 
         React.useEffect(function onStartACB(){
             updateFirebaseFromModel(model);
