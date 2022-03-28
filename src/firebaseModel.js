@@ -17,48 +17,74 @@ function updateFirebaseFromModel(model) { //Model --> Persistance
 
 		if(payload){
 
-			/*if(payload.numberOfGuests){
+			if(payload.numberOfGuests){
 				firebase.database().ref(REF+"/numberOfGuests").set(payload.numberOfGuests);
 			}
 			if(payload.setDishes){
-				firebase.database().ref(REF+"/setDishes").set(payload.setDish);
+				firebase.database().ref(REF+"/setDishes").set(payload.setDish); //or "setCurrentDish"
 			}
 			if(payload.addDish && payload.addDish.id){
 				firebase.database().ref(REF+"/menuDishes/"+payload.addDish.id).set(payload.addDish);
 			}
 			if(payload.removeDish && payload.removeDish.id){
 				firebase.database().ref(REF+"/menuDishes/"+payload.removeDish.id).set(payload.removeDish);
-			}*/
+			}
 		}	
-		console.log(payload);
+		//console.log(payload);
 	}
-	//props.model.addObserver(observerACB);
+	model.addObserver(observerACB);
 }
 
-/*function updateModelFromFirebase(argument) {
-	// body...
+function updateModelFromFirebase(model) { //Persistance --> Model
+
+	firebase.database().ref(REF+"/numberOfGuests").on("value",
+		function guestsChangedInFirebaseACB(firebaseData){ 
+			model.setNumberOfGuests(firebaseData.val());
+		});
+
+	firebase.database().ref(REF+"/setDishes").on("value", //or "setCurrentDish"
+		function cdChangedInFirebaseACB(firebaseData) {
+			model.setDishes(firebaseData.val());
+		});
+
+	firebase.database(REF+"/menuDishes").then("child_added", //or "on"
+		function dishesChangedInFirebaseACB(firebaseData){
+			function hasSameIdCB(dish) {
+				return firebaseData.key === dish.id;
+			}
+			let hasDish = [];
+			hasDish = model.dishes.filter(hasSameIdCB);
+			if(hasDish.length == 0){
+				getDishDetails(+firebaseData.key).then(function addToMenuACB(dish){model.addToMenu(dish)})
+			}
+			//model.addToMenu(dish.val());
+		}
+	);
+	firebase.database().ref(REF+"/menuDishes").on("child_removed",
+		function dishesChangedInFirebaseACB(argument) {
+			model.removeFromMenu(+firebaseData.key);
+		});
 }
+
+/*fetchDishDataBasedOnID(REF+"/menuDishes/"+model.payload.removeDish.id).on("child_removed",
+		function dishesAddedInFirebaseACB(dish){
+			model.removeFromMenu(dish.val());
+		});*/
 	
 
-	const [, setCurrentDishPromiseState] = React.useState();
-	const [, setDishes] = React.useState();
-	const [, setNumberOfGuests] = React.useState();
-
-    const [promise, setPromise] = React.useState(); //rerendering and initializing undefined component state as empty Object for clickButtonACB
-    const [qr, setSearchQuery] = React.useState(""); //rerendering and initializing of component state for clickButtonACB
-    const [ty, setSearchType] = React.useState(""); //rerendering and initializing of component state for clickButtonACB
-    const [data, setData] = React.useState([]); //rerendering and initializing of component state for clickButtonACB
-    const [err, setError] = React.useState([]); //rerendering and initializing of component state for clickButtonACB
-
-	function observerACB(payload) {
-		setDishes()
+function firebaseModelPromise() { //initial persistaence promise
+	function makeBigPromiseACB(firebaseData){
+		function createModelACB(dishes) {
+			let numberOfGuests = firebaseData.val().numberOfGuests? firebaseData.val().numberOfGuests : 1;
+			return new DinnerModel(numberOfGuests, dishes);
+		}
+		function makeDishPromiseACB(dishID) {
+			return getDishDetails(dishId);
+		}
+		const dishPromiseArray = Object.keys(firebaseData.val().menuDishes).map(makeDishPromiseCB);
+		return Promise.all(dishPromiseArray).then(createModelACB)
 	}
+	return firebase.database().ref(REF).once("value").then(makeBigPromiseACB);
+}
 
-	//props.model.addObserver();ç
-	observerACB();
-	console.log(props.model.addObserver(observerACB));
-	console.log(model);
-
-}*/
-
-export {updateFirebaseFromModel};
+export {updateFirebaseFromModel, updateModelFromFirebase, firebaseModelPromise};
