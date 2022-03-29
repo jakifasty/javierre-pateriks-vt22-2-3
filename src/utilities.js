@@ -26,7 +26,7 @@ function isKnownTypeCB(type){
 /* Now pass the callback to `Array.filter()` */
 function dishType(dish){
     if(dish.dishTypes !== undefined){  // or more general: if(dish.dishTypes)   , see JS truthy / falsy
-        const tp= dish.dishTypes.filter(isKnownTypeCB/* TODO pass the callback */);
+        const tp= dish.dishTypes.filter(isKnownTypeCB);
         if(tp.length > 0)
             return tp[0];
     }

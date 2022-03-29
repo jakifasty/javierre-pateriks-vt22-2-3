@@ -2,7 +2,7 @@
 import {render, h} from "vue";
 
 // needed for View JSX. In a Vue project you can use import {h} from "vue"
-window.React= {createElement:h};
+window.Vue= {createElement:h};
 
 import firebase from "firebase/app";
 import "firebase/database";

@@ -54,7 +54,7 @@ class DinnerModel{
         hasDish = this.dishes.filter(hasSameIdCB);
         if(hasDish.length == 0){
           this.dishes= [...this.dishes, addDish];
-          this.notifyObservers({addToMenu: addDish});
+          this.notifyObservers({dishToAdd: addDish});
         }
     }
 
@@ -82,6 +82,28 @@ class DinnerModel{
             this.notifyObservers({removeDish: dishToRemove});
         }
 
+    }
+
+    removeDish(id){
+        //callback exercise! Also return keyword exercise
+        function hasSameIdCB(dish){
+            return id !== dish.id;
+            // TODO return true if the id property of dish isDishEqualCB _different_ from the dishToRemove's id property
+            // This will keep the dish when we filter below.
+            // That is, we will not keep the dish that has the same id as dishToRemove (if any)
+        }
+        //this.dishes= this.dishes.filter(hasSameIdCB);
+        //the test "can remove dishes" should pass
+
+        let toRemove = []
+        toRemove = this.dishes.filter(hasSameIdCB);
+        if(toRemove.length == 0){
+
+        }else{
+            //notifyObservers({removeDish: id});
+            this.dishes= this.dishes.filter(function notSameIdCB(dish){return id !== dish.id;});
+            this.notifyObservers({toRemoveDish: id});
+        }
     }
 
     /*
@@ -130,28 +152,6 @@ class DinnerModel{
             resolvePromise(searchDishes(this.searchParams), this.searchResultsPromiseState, notifyACB);
         else
             resolvePromise(searchDishes(params), this.searchResultsPromiseState, notifyACB);
-    }
-    
-    removeDish(id){
-        //callback exercise! Also return keyword exercise
-        function hasSameIdCB(dish){
-            return id !== dish.id;
-            // TODO return true if the id property of dish isDishEqualCB _different_ from the dishToRemove's id property
-            // This will keep the dish when we filter below.
-            // That is, we will not keep the dish that has the same id as dishToRemove (if any)
-        }
-        //this.dishes= this.dishes.filter(hasSameIdCB);
-        //the test "can remove dishes" should pass
-
-        let toRemove = []
-        toRemove = this.dishes.filter(hasSameIdCB);
-        if(toRemove.length == 0){
-
-        }else{
-            //notifyObservers({removeDish: id});
-            this.dishes= this.dishes.filter(function notSameIdCB(dish){return id !== dish.id;});
-            this.notifyObservers({removeDish: id});
-        }
     }
 
     //new methods TW3
