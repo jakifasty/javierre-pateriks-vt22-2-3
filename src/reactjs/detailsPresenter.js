@@ -7,11 +7,11 @@ import {isDishInMenu} from "../utilities.js"
 export default
 function Details(props){
 
-	const [, setNumberOfGuests] = React.useState();
-	const [, setDishes] = React.useState();
-	const [, setData] = React.useState();
-	const [, setPromise] = React.useState();
-	const [, setError] = React.useState();
+	const [, setNumberOfGuests] = React.useState(); //re-renders when called with new value
+	const [, setDishes] = React.useState(); //re-renders when called with new value
+	const [, setData] = React.useState(); //re-renders when called with new value
+	const [, setPromise] = React.useState(); //re-renders when called with new value
+	const [, setError] = React.useState(); //re-renders when called with new value
 
 	function observerACB() {
 		setNumberOfGuests(props.model.numberOfGuests);
@@ -22,7 +22,7 @@ function Details(props){
 	}
 
 	function observerItWasCreatedACB(){
-		observerACB();
+		observerACB(); //initialization of the component state
 		props.model.addObserver(observerACB); //add the observer to the model
 
 		return function isPutDownACB(){ //function to be called if we want to remove the observer

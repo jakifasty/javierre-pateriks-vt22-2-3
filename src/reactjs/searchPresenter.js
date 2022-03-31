@@ -10,18 +10,18 @@ import {useState, useEffect} from 'react'
 export default
 function Search(props){ //React state hook, i.e. React Steteful Component
 
-    //declare constants to be used
-    const [promise, setPromise] = React.useState(); //rerendering and initializing undefined component state as empty Object for clickButtonACB
-    const [qr, setSearchQuery] = React.useState(""); //rerendering and initializing of component state for clickButtonACB
-    const [ty, setSearchType] = React.useState(""); //rerendering and initializing of component state for clickButtonACB
-    const [data, setData] = React.useState([]); //rerendering and initializing of component state for clickButtonACB
-    const [err, setError] = React.useState([]); //rerendering and initializing of component state for clickButtonACB
+    //declare constants to be used, i.e. [value, setter] = React.useState(initialValue);
+    const [promise, setPromise] = React.useState(); //rerendering and initializing undefined component creation state
+    const [qr, setSearchQuery] = React.useState(""); //rerendering and initializing of component creation state
+    const [ty, setSearchType] = React.useState(""); //rerendering and initializing of component creation state
+    const [data, setData] = React.useState([]); //rerendering and initializing of component creation state
+    const [err, setError] = React.useState([]); //rerendering and initializing of component creation state 
 
 
     function wasCreatedACB(){
         setPromise(searchDishes({})); //query: setSearchQuery, type: setSearchQuery //promise.then(setData).catch(setError)
     }
-    React.useEffect(wasCreatedACB, []);
+    React.useEffect(wasCreatedACB, []); //we copy the properties of the Model to the Component state
 
     function promiseIsChangedACB(){
 
@@ -29,7 +29,7 @@ function Search(props){ //React state hook, i.e. React Steteful Component
         setError(null);
         let itIsCancelled = false;
 
-        function changedBackACB(){
+        function changedBackACB(){ //
             itIsCancelled = true;
         }
 
@@ -47,7 +47,7 @@ function Search(props){ //React state hook, i.e. React Steteful Component
             promise.then(savingDataACB).catch(savingErrorACB);
         return changedBackACB;
     }
-    React.useEffect(promiseIsChangedACB, [promise]);
+    React.useEffect(promiseIsChangedACB, [promise]); //derived state of a React component
 
     function clickButtonACB(){ //search on click button
         setPromise(searchDishes({query: qr, type: ty}));
