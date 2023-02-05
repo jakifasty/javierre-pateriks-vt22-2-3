@@ -1,3 +1,5 @@
+Web application in React.js consisting in a dishes view where the user can filter, select, choose and read information about dishes from an API database in Firebase.
+
 # npm-tutorial
 tutorial version 5
 
